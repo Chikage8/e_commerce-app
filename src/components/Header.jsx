@@ -7,20 +7,26 @@ import { ReactComponent as Monitor} from '../icons/monitor-icon.svg';
 import { ReactComponent as Laptop} from '../icons/laptop-icon.svg';
 import { ReactComponent as Router} from '../icons/internet-router-icon.svg';
 import { ReactComponent as SmartWatch} from '../icons/smartwatch-wifi-icon.svg';
+import { ReactComponent as Phone } from '../icons/phone.svg';
+import { ReactComponent as Tablet } from '../icons/tablet.svg';
+import SearchBar from "./SearchBar.jsx";
 
 function Header() {
     return(
         <Navbar>
             <Logo />     
-            <NavItem icon={<Mouse/>}/>
             <NavItem icon={<Monitor/>} />
             <NavItem icon={<Laptop/>} />
-            <NavItem icon={<Router/>} />
+            <NavItem icon={<Mouse/>}/>
+            <NavItem icon={<Phone />} />
+            <NavItem icon={<Tablet />} />
             <NavItem icon={<SmartWatch/>} />
+            <NavItem icon={<Router/>} />
 
             <NavItem icon={<CaretIcon/>}>
                 <p>Hello World</p>
             </NavItem>
+            <SearchBar/>
         </Navbar>
     );
 }
