@@ -2,10 +2,59 @@
   --bg: #242526;
   --bg-accent: #484a4d;
   --text-color: #dadce1;
-  --nav-size: 60px;
+  --card-height: 420px;
+  --card-w-h-ratio: 0.9;
+  --nav-height: 60px;
   --border: 1px solid #474a4d;
   --border-radius: 8px;
   --speed: 500ms;
+  --content-section-bg: rgb(200, 225, 225);
+  --card-bg: #ffffff;
+  --font-size: 16px;
+}
+
+.content-section {  
+  display: grid;
+  margin-left: 9%;
+  margin-right: 10%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  background-color: var(--content-section-bg);
+}
+
+.card {
+  --card-width: calc(var(--card-height)*var(--card-w-h-ratio));
+  margin: 20px;
+  background-color: var(--card-bg)  ;
+  display: flex;  
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: var(--card-width); 
+  height: var(--card-height);
+}
+
+.card * {
+  margin-left: 2rem;
+}
+
+.card-title {
+  font-size: 22px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.card-image {  
+  width: calc(var(--card-width)*0.82);   
+  height: calc(var(--card-height)*0.75);
+  max-width: calc(var(--card-width)*0.9);  
+  max-height: calc(var(--card-height)*0.8);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card button {
+ 
 }
 
 ul {
@@ -20,29 +69,59 @@ a {
 }
 
 .navbar {
-  height: var(--nav-size);
+  height: var(--nav-height);
   background-color: var(--bg);
   padding: 0 1rem;
   border-bottom: var(--border);
+  margin: 0;
+  padding: 0;
 }
 
 .navbar-nav {
   max-width: 100%;
   height: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  /* row-gap: 5rem; */
 }
 
 .nav-item {
-  width: calc(var(--nav-size) * 0.8);
+  width: calc(var(--nav-height) * 0.8);
   display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+}
+
+.logo-nav-item {
+  width: calc(var(--nav-height) * 1.5);
+  display: flex;
+  margin-left: 2rem;
+  margin-right: 1.5rem;
   align-items: center;
   justify-content: center;
 }
 
 /* Icon Button */
 .icon-button {
-  --button-size: calc(var(var(--nav-size) * 0.5));
+  --button-size: calc(var(var(--nav-height) * 0.5));
+  width: var(--button-size);
+  height: var(--button-size);
+  background-color: var(--bg-accent);
+  border-radius: 50%;
+  padding: 5px;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 300ms;
+}
+
+.logo-icon-button {
+  --button-size: calc(var(var(--nav-height) * 0.8));
   width: var(--button-size);
   height: var(--button-size);
   background-color: var(--bg-accent);
@@ -61,6 +140,24 @@ a {
 
 .icon-button svg {
   fill: var(--text-color);
-  width: 20px;
-  height: 20px;
+  --svg-size: calc(var(--nav-height)*1/3);
+  width: var(--svg-size);
+  height: var(--svg-size);
+}
+
+.logo-icon-button svg {  
+  fill: var(--text-color);
+  --logo-svg-size: calc(var(--nav-height) *1/2);
+  width: var(--logo-svg-size);
+  height: var(--logo-svg-size);
+  padding: 0;
+  margin: 0;
+}
+.logo-icon-button #brand-name {  
+  fill: var(--text-color);
+  width: 75px;
+  height: 25px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
 }
