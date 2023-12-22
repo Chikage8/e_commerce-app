@@ -128,14 +128,16 @@ a {
 }
 
 .logo-icon-button {
-  --button-size: calc(var(var(--nav-height) * 0.8));
-  width: var(--button-size);
+  --button-size: calc(var(var(--nav-height) * 0.8));  
   height: var(--button-size);
   background-color: var(--nav-bg-accent);
   border-radius: 50%;
   padding: 5px;
   margin: 2px;
   display: flex;
+  gap: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   align-items: center;
   justify-content: center;
   transition: filter 300ms;
@@ -161,10 +163,10 @@ a {
   margin: 0;
 }
 .logo-icon-button #brand-name {  
-  fill: var(--text-color);
-  width: 75px;
-  height: 25px;
+  color: var(--text-color);
+  /* width: 75px;   */
   text-align: center;
+  align-self: center;
   padding: 0;
   margin: 0;
 }

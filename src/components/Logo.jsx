@@ -1,12 +1,17 @@
 import { ReactComponent as LogoIcon } from './usb-icon.svg';
 
-function Logo() {
+function Logo(props) {
+
+    function handleClick() {        
+        props.setCategoryApp('all');
+    }
+
     return(
         <li className='logo-nav-item'>
-            <a className='logo-icon-button' href="#">
+            <button className='logo-icon-button' href="#" onClick={handleClick}>
               <LogoIcon/>   
               <p id='brand-name'>Azamon</p>             
-            </a>
+            </button>
         </li>
     );
 }

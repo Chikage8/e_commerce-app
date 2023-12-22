@@ -15,7 +15,7 @@ import SearchBar from "./SearchBar.jsx";
 function Header(props, {category, setCategoryApp}) {
     return(
         <Navbar>
-            <Logo />     
+            <Logo setCategoryApp={props.setCategoryApp}/>     
             <NavItem setCategoryApp={props.setCategoryApp} category='desktop' icon={<Monitor/>} />
             <NavItem setCategoryApp={props.setCategoryApp} category='laptop' icon={<Laptop/>} />
             <NavItem setCategoryApp={props.setCategoryApp} category='mouse' icon={<Mouse/>}/>
