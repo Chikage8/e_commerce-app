@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 
-function NavItem(props) {
-
-    const[open, setOpen] = useState(false);
+function NavItem(props, { category, setCategoryApp}) {         
+    
+    function handleClick() {
+        const newCategory = props.category;
+        props.setCategoryApp(newCategory);
+    }
 
     return (
         <li className="nav-item">
-            <a href="#" className="icon-button" onClick={()=>setOpen(!open)}> 
+            <button href="/" className="icon-button" onClick={handleClick}>
                 {props.icon}
-            </a>
-            {open && props.children}
+            </button>            
         </li>
     );
 }
