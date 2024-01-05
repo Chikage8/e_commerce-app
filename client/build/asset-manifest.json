@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c35dda9c.css",
+    "main.js": "/static/js/main.16e7f432.js",
+    "static/js/787.e8a3bb20.chunk.js": "/static/js/787.e8a3bb20.chunk.js",
+    "static/media/smartwatch-wifi-icon.svg": "/static/media/smartwatch-wifi-icon.8368e4ca586831607a7532c9924a3027.svg",
+    "static/media/internet-router-icon.svg": "/static/media/internet-router-icon.f9257f680ecfd9067fad09e7a7ad0a33.svg",
+    "static/media/mouse-icon.svg": "/static/media/mouse-icon.5ef8ebab9c314ae0ef7665dcfe63939b.svg",
+    "static/media/usb-icon.svg": "/static/media/usb-icon.3fadceefa663853f5b45cecf0c019ed3.svg",
+    "static/media/monitor-icon.svg": "/static/media/monitor-icon.2dcf30234c9ab1db78ec451e05a4241b.svg",
+    "static/media/tablet.svg": "/static/media/tablet.3c81a2e77f7596a8595c0cef2d442357.svg",
+    "static/media/laptop-icon.svg": "/static/media/laptop-icon.a5466e7a1ff42cd41c4c1de85e87a853.svg",
+    "static/media/phone.svg": "/static/media/phone.a7b6e4876415325ff17884baae0ef45e.svg",
+    "index.html": "/index.html",
+    "static/media/caret.svg": "/static/media/caret.ad4cbc8745c2f5f3c905d254c56ef2c4.svg",
+    "main.c35dda9c.css.map": "/static/css/main.c35dda9c.css.map",
+    "main.16e7f432.js.map": "/static/js/main.16e7f432.js.map",
+    "787.e8a3bb20.chunk.js.map": "/static/js/787.e8a3bb20.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c35dda9c.css",
+    "static/js/main.16e7f432.js"
+  ]
+}

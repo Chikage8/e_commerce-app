@@ -1,5 +1,6 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
+import axios from "axios";
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import Content from './components/Content.jsx';
@@ -11,15 +12,19 @@ function App() {
   function setCategoryApp(value) {
     setCategory(value); 
   }
+   
+  const [serverData, setServerData] = useState([{}]);
 
-  // function showCategory(value) {
-  //   return <h1> {category} </h1>;
-  // }
+  useEffect(() => {
+    fetch('http://localhost:5000/')
+      .then(response => response.json())
+      .then(data => setServerData(data));
+  }, []);
 
   return (
-    <div className='App'>
+    <div className='App'>      
       <Header setCategoryApp={setCategoryApp} />
-      <Content category={category} setCategoryApp={setCategoryApp} />   
+      <Content products={serverData} category={category} />    
     </div>
   );
 }
