@@ -2,6 +2,7 @@ import Navbar from "./Navbar"
 import NavItem from "./NavItem";
 import NavMenuItem from "./NavMenuItem.jsx";
 import Logo from './Logo.jsx';
+import SignInMenuItem from "./SignInMenuItem.jsx";
 import { ReactComponent as CaretIcon } from '../icons/caret.svg';
 import { ReactComponent as Mouse} from '../icons/mouse-icon.svg';
 import { ReactComponent as Monitor} from '../icons/monitor-icon.svg';
@@ -27,6 +28,7 @@ function Header(props, {category, setCategoryApp}) {
                 <p>Hello World</p>
             </NavMenuItem>
             <SearchBar/>
+            <SignInMenuItem />
         </Navbar>
     );
 }

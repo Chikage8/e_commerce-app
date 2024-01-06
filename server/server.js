@@ -30,6 +30,16 @@ app.get("/", async (req, res) => {
   }   
 });
 
+app.get("/signin", async (req, res) => {
+  try {
+    const result = await db.query("SELECT * FROM products ORDER BY id ASC");
+    items = result.rows;
+    res.send(items);    
+  } catch (error) {
+    console.error("error occurred while trying to fill in items list", error.stack);
+  }   
+});
+
 // app.post("/add", async (req, res) => {
 //   const itemContent = req.body.newItem;
 //   const result = await db.query("SELECT MAX(id)+1 FROM items");

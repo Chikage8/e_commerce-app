@@ -13,15 +13,40 @@
   --font-size: 16px;
 }
 
-label {
-  display: none;
+.outer-box {
+  border: groove #EEEEEE;  
+  border-radius: 2%;
+  position: absolute;
+  top: 10%;
+  left: 35%;
+  width: min-content;
+}
+
+.inner-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+}
+
+.padding-extra-large {
+  padding: 3rem;
+  padding-top: 0.5rem;
+}
+
+#login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#sign-in-link {
+  margin-left: 1rem;
 }
 
 input {
   --input-height: calc(var(--nav-height) * 0.4);
   height: var(--input-height);
   width: calc(var(--input-height)*15);
-  margin-left: 1rem;
 }
 
 button {
