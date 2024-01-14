@@ -12,8 +12,10 @@ import { ReactComponent as SmartWatch} from '../icons/smartwatch-wifi-icon.svg';
 import { ReactComponent as Phone } from '../icons/phone.svg';
 import { ReactComponent as Tablet } from '../icons/tablet.svg';
 import SearchBar from "./SearchBar.jsx";
+import React, { useContext } from "react";
 
 function Header(props, {category, setCategoryApp}) {
+
     return(
         <Navbar>
             <Logo setCategoryApp={props.setCategoryApp}/>     
@@ -25,7 +27,7 @@ function Header(props, {category, setCategoryApp}) {
             <NavItem setCategoryApp={props.setCategoryApp} category='smartwatch' icon={<SmartWatch/>} />
             <NavItem setCategoryApp={props.setCategoryApp} category='router' icon={<Router/>} />
             <NavMenuItem icon={<CaretIcon/>}>
-                <p>Hello World</p>
+                <p color='white' >Hello World</p>
             </NavMenuItem>
             <SearchBar/>
             <SignInMenuItem />

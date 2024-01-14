@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import pg from "pg"
@@ -8,6 +8,8 @@ app.use(cors());
 const port = 5000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());             // for application/json
+// app.use(express.urlencoded());       // for application/x-www-form-urlencoded
 
 const db = new pg.Client({
   user: "postgres",
@@ -30,13 +32,38 @@ app.get("/", async (req, res) => {
   }   
 });
 
-app.get("/signin", async (req, res) => {
+app.post("/signin", async (req, res) => {
   try {
-    const result = await db.query("SELECT * FROM products ORDER BY id ASC");
-    items = result.rows;
-    res.send(items);    
+    let email = req.body.email.email;
+    let password =req.body.password.password;
+
+    console.log(email);
+
+    const result = await db.query("SELECT * FROM users WHERE email = $1 AND password = $2", [email, password]);    
+    if (result.rows.length != 0) {
+      console.log(result.rows)
+      res.send({"user": result.rows[0]})
+    } else {
+      console.log("sending response");
+      res.send("You are not registered to our website")
+    }
   } catch (error) {
     console.error("error occurred while trying to fill in items list", error.stack);
+  }   
+});
+
+app.post("/register", async (req, res) => {
+  try {
+    let name = req.body.name.name;
+    let email = req.body.email.email;
+    let password =req.body.password.password;
+    // await db.query("DELETE FROM items WHERE id = $1", [itemToDelete]);
+    console.log(email, password, name);
+    await db.query("INSERT INTO users (email, password, name) VALUES ($1, $2, $3);", [email, password, name]);        
+    const result = await db.query("SELECT * FROM users WHERE email = $1 AND password = $2", [email, password]);    
+    res.send({"user": result.rows[0]})
+  } catch (error) {
+    console.error("error occurred while trying to register the user", error.stack);
   }   
 });
 

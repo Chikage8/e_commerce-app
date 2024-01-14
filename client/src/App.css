@@ -13,6 +13,12 @@
   --font-size: 16px;
 }
 
+.user-options {
+  position: absolute;
+  margin-left: 30%;
+  color: black;
+}
+
 .outer-box {
   border: groove #EEEEEE;  
   border-radius: 2%;
@@ -43,6 +49,10 @@
   margin-left: 1rem;
 }
 
+#login-submit {
+  margin-top: 1rem;
+}
+
 input {
   --input-height: calc(var(--nav-height) * 0.4);
   height: var(--input-height);
@@ -51,6 +61,12 @@ input {
 
 button {
   border: none;
+}
+
+.centered-logo {
+  position: absolute;
+  /* margin-top: 1rem; */
+  margin-left: 43.4%;
 }
 
 .content-section {  
