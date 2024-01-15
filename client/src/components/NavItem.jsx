@@ -9,7 +9,7 @@ function NavItem(props, { category, setCategoryApp}) {
 
     return (
         <li className="nav-item">
-            <button href="/" className="icon-button" onClick={handleClick}>
+            <button href="/" className="icon-button svg-container" onClick={handleClick}>
                 {props.icon}
             </button>            
         </li>

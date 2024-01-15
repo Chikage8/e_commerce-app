@@ -13,6 +13,7 @@ import { ReactComponent as Phone } from '../icons/phone.svg';
 import { ReactComponent as Tablet } from '../icons/tablet.svg';
 import SearchBar from "./SearchBar.jsx";
 import React, { useContext } from "react";
+import ShoppingBasket from "./ShoppingBasket.jsx";
 
 function Header(props, {category, setCategoryApp}) {
 
@@ -31,6 +32,7 @@ function Header(props, {category, setCategoryApp}) {
             </NavMenuItem>
             <SearchBar/>
             <SignInMenuItem />
+            <ShoppingBasket />
         </Navbar>
     );
 }
