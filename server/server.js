@@ -26,6 +26,26 @@ app.get("/", async (req, res) => {
   try {
     const result = await db.query("SELECT * FROM products ORDER BY id ASC");
     items = result.rows;
+    // const result2 = await db.query("SELECT id, main_image FROM product_images ORDER BY id ASC")
+    // console.log(result2.rows)
+    // items.main_image = result2.rows[0].main_image
+    console.log(items)
+    // console.log(items)
+    res.send(items);    
+  } catch (error) {
+    console.error("error occurred while trying to fill in items list", error.stack);
+  }   
+});
+
+app.get("/mice", async (req, res) => {
+  try {
+    const result = await db.query("SELECT * FROM products ORDER BY id ASC WHERE category='mouse'");
+    items = result.rows;
+    // const result2 = await db.query("SELECT id, main_image FROM product_images ORDER BY id ASC")
+    // console.log(result2.rows)
+    // items.main_image = result2.rows[0].main_image
+    console.log(items)
+    // console.log(items)
     res.send(items);    
   } catch (error) {
     console.error("error occurred while trying to fill in items list", error.stack);

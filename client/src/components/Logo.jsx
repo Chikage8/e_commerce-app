@@ -10,10 +10,11 @@ function Logo(props) {
     }
 
     function handleClick() {    
-        if (props.setCategoryApp !== undefined)    
-        {
-            props.setCategoryApp('all');
-        }
+        localStorage.setItem('category', JSON.stringify('all'))
+        // if (props.setCategoryApp !== undefined)    
+        // {
+        //     props.setCategoryApp('all');
+        // }
     }
 
     return(

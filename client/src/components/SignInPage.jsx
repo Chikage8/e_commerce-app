@@ -38,7 +38,7 @@ function SignInPage(props) {
                 email: {email},
                 password: {password}
             }).then(response => { console.log(response.data)
-                typeof response.data == 'object' ? window.localStorage.setItem('user', JSON.stringify(response.data)) : setWarning("This email and password combination is not registered to our services")
+                typeof response.data == 'object' ? localStorage.setItem('user', JSON.stringify(response.data)) : setWarning("This email and password combination is not registered to our services")
                 typeof response.data == 'object' ? redirect('/') : setMailWarning(null)})
               .catch((error) => console.log(error))
         } else if (passwordPattern.test(password)){     
@@ -60,7 +60,7 @@ function SignInPage(props) {
     };    
     
     return(
-        <div className="page-container">
+        <div className="page-container user-management-page">
             <Navbar>
                 <Logo className="centered-logo" setCategoryApp={props.setCategoryApp} />
             </Navbar>
@@ -68,13 +68,13 @@ function SignInPage(props) {
                 <div className="inner-box padding-extra-large">
                     <h1 id="sign-in-header">Sign In</h1>
                     <label htmlFor="sign-in-email-input">E-mail: </label>
-                    <input id="sign-in-email-input" name="email" type="email" required onChange={handleEmailChange} />
+                    <input id="sign-in-email-input" className='user-management-input' name="email" type="email" required onChange={handleEmailChange} />
                     {mailWarning ? <h5>{mailWarning}</h5> : null}
                     <label htmlFor="sign-in-password-input" >Password: </label>
-                    <input id="sign-in-password-input" name="password" type="password" required onChange={handlePasswordChange} />
+                    <input id="sign-in-password-input" className='user-management-input' name="password" type="password" required onChange={handlePasswordChange} />
                     {passwordWarning ? <h5>{passwordWarning}</h5> : null}
                     {warning ? <h5>{warning}</h5> : null}
-                    <input id="login-submit" type="submit" onClick={handleClick} />
+                    <input id="login-submit" className='user-management-input' type="submit" onClick={handleClick} />
                 </div>
                 <div>
                     <a className="user-options" href="/register"><h5>New to Azamon? Register here</h5></a>

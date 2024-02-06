@@ -1,11 +1,13 @@
-import Card from '../components/Card.jsx';
-import React, {useState } from 'react';
+import Card from './Card.jsx';
+import React, {useState, useEffect } from 'react';
 
 function Content(props) {        
+    let products = JSON.parse(localStorage.getItem('products'))
+    let category = JSON.parse(localStorage.getItem('category'))
     let filteredProducts = []
-    props.products.map((product, index) => {        
-        if(product.category == props.category || props.category == 'all') {
-            filteredProducts.push(<Card key={index} className={product.category} title={product.title} img={product.img} />)
+    products.map((product, index) => {  
+        if(product.category == category || category == "all") {
+            filteredProducts.push(<Card key={index} className={product.category} category={product.category} title={product.title} main_image={product.main_image} />)
         }
     })
 

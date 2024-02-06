@@ -75,15 +75,15 @@ function RegisterPage(props) {
                 <div className="inner-box padding-extra-large">
                     <h1 id="register-header">Register</h1>
                     <label htmlFor="register-in-email-input">Name: </label>
-                    <input id="register-name-input" name="name" type="text" required onChange={handleNameChange} />
+                    <input id="register-name-input" className='user-management-input' name="name" type="text" required onChange={handleNameChange} />
                     {nameWarning ? <h5> { nameWarning } </h5> : null}
                     <label htmlFor="register-email-input">E-mail: </label>
-                    <input id="register-email-input" name="email" type="email" required onChange={handleEmailChange} />
+                    <input id="register-email-input" className='user-management-input' name="email" type="email" required onChange={handleEmailChange} />
                     {mailWarning ? <h5> { mailWarning } </h5> : null}
                     <label htmlFor="register-password-input" >Password: </label>
-                    <input id="register-password-input" name="password" type="password" required onChange={handlePasswordChange}/>
+                    <input id="register-password-input" className='user-management-input' name="password" type="password" required onChange={handlePasswordChange}/>
                     {passwordWarning ? <h5>{passwordWarning}</h5> : null}
-                    <input id="login-submit" type="submit" onClick={handleClick} />
+                    <input id="login-submit" className='user-management-input' type="submit" onClick={handleClick} />
                 </div>
                 <div>
                     <a className="user-options" href="/signin"><h5>Already have an account? Sign In</h5></a>

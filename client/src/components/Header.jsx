@@ -20,13 +20,13 @@ function Header(props, {category, setCategoryApp}) {
     return(
         <Navbar>
             <Logo setCategoryApp={props.setCategoryApp}/>     
-            <NavItem setCategoryApp={props.setCategoryApp} category='desktop' icon={<Monitor/>} />
-            <NavItem setCategoryApp={props.setCategoryApp} category='laptop' icon={<Laptop/>} />
-            <NavItem setCategoryApp={props.setCategoryApp} category='mouse' icon={<Mouse/>}/>
-            <NavItem setCategoryApp={props.setCategoryApp} category='phone' icon={<Phone />} />
-            <NavItem setCategoryApp={props.setCategoryApp} category='tablet' icon={<Tablet />} />
-            <NavItem setCategoryApp={props.setCategoryApp} category='smartwatch' icon={<SmartWatch/>} />
-            <NavItem setCategoryApp={props.setCategoryApp} category='router' icon={<Router/>} />
+            <NavItem category='monitor' icon={<Monitor/>} />
+            <NavItem category='laptop' icon={<Laptop/>} />
+            <NavItem category='mouse' icon={<Mouse/>}/>
+            <NavItem category='phone' icon={<Phone />} />
+            <NavItem category='tablet' icon={<Tablet />} />
+            <NavItem category='smartwatch' icon={<SmartWatch/>} />
+            <NavItem category='router' icon={<Router/>} />
             <NavMenuItem icon={<CaretIcon/>}>
                 <p color='white' >Hello World</p>
             </NavMenuItem>

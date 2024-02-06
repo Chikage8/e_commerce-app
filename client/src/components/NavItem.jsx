@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 
-function NavItem(props, { category, setCategoryApp}) {         
-    
+function NavItem(props) {         
+
     function handleClick() {
-        const newCategory = props.category;
-        props.setCategoryApp(newCategory);
+        console.log(JSON.stringify(props.category))
+        localStorage.setItem('category', JSON.stringify(props.category))
+        // const newCategory = props.category;
+        // props.setCategoryApp(newCategory);
     }
 
     return (
         <li className="nav-item">
-            <button href="/" className="icon-button svg-container" onClick={handleClick}>
+            <a href="/" className="icon-button svg-container" onClick={handleClick}>
                 {props.icon}
-            </button>            
+            </a>            
         </li>
     );
 }
