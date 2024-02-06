@@ -361,13 +361,6 @@ a {
   
 }
 
-.left-top-dollar-sign {
-  font-size: 10px;
-  padding-top: 2px;
-  justify-self: center;
-  align-self: baseline;
-}
-
 #discounted-price-div {
   display: flex;
   flex-direction: row;
@@ -378,4 +371,32 @@ a {
 
 .smaller-fonts {
   font-size: 13px;
+}
+
+#price-display-container-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.left-top-dollar-sign {
+  justify-self: center;
+  align-self: flex-start;
+  font-size: 14px;
+  padding-top: 0.4rem;
+  margin-right: 0.1rem;
+}
+
+.price-decimal-part {
+  justify-self: center;
+  align-self: flex-start;
+  font-size: 16px;
+  padding-top: 0.3rem;
+  margin-left: 0.1rem;
+}
+
+#price-display-int-part {
+  font-weight: 600;
 }

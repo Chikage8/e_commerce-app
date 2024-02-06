@@ -3,6 +3,7 @@ import { ReactComponent as EmptyStar } from "../icons/emptyStar.svg"
 import { ReactComponent as HalfStar } from "../icons/halfStar.svg"
 import { ReactComponent as FullStar } from "../icons/fullStar.svg"
 import PropValueInfo from './PropValueInfo'
+import PriceDisplay from './PriceDisplay'
 
 const ProductInfo = (props) => {
 
@@ -18,12 +19,17 @@ const ProductInfo = (props) => {
   let review_count = product.review_count
   let list_price = product.list_price
   let discount_percentage = product.discount_percentage
+  let current_price;
   let product_brand = product.product_brand
   let color = product.color
   let fullStarCount = 0
   let halfStar = false
   let stars = []
 
+  function naiveRound(num, decimalPlaces = 2) {
+    var p = Math.pow(10, decimalPlaces);
+    return Math.round(num * p) / p;
+  } 
   // document.getElementById('star-color-second-half').setAttribute('stop-color', 'white')
 
   products.map((product, index) => {  
@@ -33,6 +39,7 @@ const ProductInfo = (props) => {
         review_count = product.review_count
         list_price = product.list_price
         discount_percentage = product.discount_percentage
+        current_price = naiveRound(list_price*(1-(discount_percentage/100)))
         product_brand = product.product_brand
         color = product.color
       }
@@ -65,10 +72,7 @@ const ProductInfo = (props) => {
     stars.push(<EmptyStar />)
   }
 
-  function naiveRound(num, decimalPlaces = 0) {
-    var p = Math.pow(10, decimalPlaces);
-    return Math.round(num * p) / p;
-}
+  
 
   return (
     <div id='product-info-container'>
@@ -87,7 +91,10 @@ const ProductInfo = (props) => {
       <hr />
       <div id='price-div'>
         <div id='current-price-div'>
-          <div id='discount-display-div'>-{discount_percentage}%</div> <div id='discounted-price-div'><div className='left-top-dollar-sign'>$</div>{naiveRound(list_price*(1-(discount_percentage/100)))-0.01}</div>
+          <div id='discount-display-div'>-{discount_percentage}%</div>
+          <div id='discounted-price-div'>
+            <PriceDisplay price={current_price} />
+          </div>
         </div>
         <div id='original-price-div'>
           List Price: {list_price}
