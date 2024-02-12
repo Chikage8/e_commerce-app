@@ -29,7 +29,6 @@ app.get("/", async (req, res) => {
     // const result2 = await db.query("SELECT id, main_image FROM product_images ORDER BY id ASC")
     // console.log(result2.rows)
     // items.main_image = result2.rows[0].main_image
-    console.log(items)
     // console.log(items)
     res.send(items);    
   } catch (error) {
@@ -37,9 +36,10 @@ app.get("/", async (req, res) => {
   }   
 });
 
-app.get("/mice", async (req, res) => {
+app.get("/mouse/:id", async (req, res) => {
   try {
-    const result = await db.query("SELECT * FROM products ORDER BY id ASC WHERE category='mouse'");
+    const id = req.params.id;  
+    const result = await db.query("SELECT * FROM mouse_features WHERE mouse_product_id=$1",[id]);
     items = result.rows;
     // const result2 = await db.query("SELECT id, main_image FROM product_images ORDER BY id ASC")
     // console.log(result2.rows)

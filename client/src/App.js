@@ -5,21 +5,19 @@ import HomePage from './components/HomePage.jsx';
 import SignInPage from './components/SignInPage.jsx';
 import RegisterPage from './components/RegisterPage.jsx';
 import ShoppingBasketPage from './components/ShoppingBasketPage.jsx';
-import MicePage from './components/ProductPage.jsx';
 import ProductPage from './components/ProductPage.jsx';
+import AddedToBasketPage from './components/AddedToBasketPage.jsx';
 
 function App() {      
   
   useEffect(() => {
+    console.log("inside useEffect")
     fetch('http://localhost:5000/')
     .then(response => response.json())
     .then(data => localStorage.setItem('products', JSON.stringify(data)));
   }, []);
 
-  console.log(localStorage.getItem('category'))
-
-  let products = JSON.parse(localStorage.getItem('products'))
-  console.log(products)
+  const [products, setProducts] = useState(JSON.parse(localStorage.getItem('products')))
 
   const [user, setUser] = useState(localStorage.getItem('user'));
 
@@ -40,6 +38,7 @@ function App() {
           <Route path="/signin" element={<SignInPage  />} />
           <Route path="/register" element={<RegisterPage  />} />
           <Route path="/basket" element={<ShoppingBasketPage  />} />
+          <Route path="/added" element={<AddedToBasketPage />} />
           {productRoutes}
           {/* <Route path="/mouse" element={<ProductPage />} /> */}
         </Routes>
