@@ -11,11 +11,18 @@ import { ReactComponent as Router} from '../icons/internet-router-icon.svg';
 import { ReactComponent as SmartWatch} from '../icons/smartwatch-wifi-icon.svg';
 import { ReactComponent as Phone } from '../icons/phone.svg';
 import { ReactComponent as Tablet } from '../icons/tablet.svg';
+import { ReactComponent as LeftArrow} from '../icons/left-arrow.svg';
 import SearchBar from "./SearchBar.jsx";
 import React, { useContext } from "react";
 import ShoppingBasket from "./ShoppingBasket.jsx";
 
 function Header(props, {category, setCategoryApp}) {
+
+    function RenderLeftArrow({addedPage}) {
+        if (addedPage) {
+            return <li className="svg-container"><LeftArrow/></li>
+        }
+    }
 
     return(
         <Navbar>
@@ -33,6 +40,7 @@ function Header(props, {category, setCategoryApp}) {
             <SearchBar/>
             <SignInMenuItem />
             <ShoppingBasket />
+            <RenderLeftArrow addedPage={props.addedPage} />
         </Navbar>
     );
 }

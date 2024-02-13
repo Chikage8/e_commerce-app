@@ -23,15 +23,17 @@ const AddedToBasketPage = (props) => {
 
     return (
         <div id='added-to-basket-page-container'>
-            <Header />
-            <div id='added-to-basket-left-col'>
-                <img src={recentlyAddedProduct.main_image} alt="" />
-                <h3>Added To Cart</h3>
-            </div>
-            <div id='added-to-basket-right-col'>
-                <div>Card Subtotal: <PriceDisplay price={current_price} /> </div>
-                <div>Proceed to checkout</div>
-                <div>Go to Basket</div>
+            <Header addedPage={true} />
+            <div id='added-to-basket-cols-container'>
+                <div id='added-to-basket-left-col'>
+                    <img src={recentlyAddedProduct.main_image} alt="" />
+                    <h3>Added To Cart</h3>
+                </div>
+                <div id='added-to-basket-right-col'>
+                    <div>Card Subtotal: <PriceDisplay price={current_price} /> </div>
+                    <div>Proceed to checkout</div>
+                    <div>Go to Basket</div>
+                </div>
             </div>
         </div>
     )
