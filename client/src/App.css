@@ -12,6 +12,7 @@
   --content-section-bg: rgb(200, 225, 225);
   --card-bg: #ffffff;
   --font-size: 16px;
+  --border-color: #AAAAAA99;
 }
 
 .user-options {
@@ -643,3 +644,21 @@ p {
   font-weight: 500;
   margin-bottom: calc(var(--padding)*2);
 }
+
+#go-to-basket-button-container {
+  background-color: white;
+  color: black;
+  margin-top: calc(var(--padding)*12);
+  padding-top: calc(var(--padding)*0);
+  padding-bottom: calc(var(--padding)*3);
+  padding-left: calc(var(--padding)*15);
+  padding-right: calc(var(--padding)*15);
+  border: solid var(--border-color);
+  border-radius: 63px;
+  border-width: var(--padding);
+} 
+
+#go-to-basket-button {
+  background-color: white;
+  color: black;
+} 
