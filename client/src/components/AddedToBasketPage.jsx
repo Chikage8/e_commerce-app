@@ -2,6 +2,7 @@ import React from 'react'
 import PriceDisplay from './PriceDisplay'
 import Header from './Header'
 import BuyButtons from './BuyButtons'
+import GoToBasketButton from './GoToBasketButton'
 
 const AddedToBasketPage = (props) => {
 
@@ -41,7 +42,7 @@ const AddedToBasketPage = (props) => {
             <div id='added-to-basket-new-right-col'> 
                 <p id='added-to-basket-new-right-col-subtotal-text'>Subtotal</p>
                 <h4 id='added-to-basket-new-right-col-current-price'>${current_price}</h4>
-                {/* <GoToCartButton/> */}
+                <GoToBasketButton />
                 <hr />
             </div>
         </div>
