@@ -39,8 +39,8 @@ const AddedToBasketPage = (props) => {
                 </div>
             </div>
             <div id='added-to-basket-new-right-col'> 
-                <p>Subtotal</p>
-                <h5 style={{color: "#DD5500"}}>${current_price}</h5>
+                <p id='added-to-basket-new-right-col-subtotal-text'>Subtotal</p>
+                <h5 id='added-to-basket-new-right-col-current-price'>${current_price}</h5>
                 {/* <GoToCartButton/> */}
                 <hr />
             </div>

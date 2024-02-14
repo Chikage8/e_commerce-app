@@ -522,7 +522,7 @@ p {
 }
 
 #date-p {
-  margin-right: 0.2rem;
+  margin-left: 0.3rem;
 }
 
 #delivery-section-delivery-date {
@@ -621,7 +621,7 @@ p {
   background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   gap: 0px;
 }
@@ -630,4 +630,16 @@ p {
   margin-left: 12rem;
   margin-right: 0rem;
   padding: 0;
+}
+
+#added-to-basket-new-right-col-current-price {
+  color: #AA5500;
+  margin: 0;
+}
+
+#added-to-basket-new-right-col-subtotal-text {
+  margin-top: calc(var(--padding)*12);
+  font-size: smaller;
+  font-weight: 500;
+  margin-bottom: calc(var(--padding)*2);
 }
