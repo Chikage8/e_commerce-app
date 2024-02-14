@@ -633,9 +633,20 @@ p {
   padding: 0;
 }
 
-#added-to-basket-new-right-col-current-price {
-  color: #AA5500;
+.classic-price-display {
   margin: 0;
+}
+
+.dark-orange {
+  color: #AA5500;
+}
+
+.black {
+  color: black;
+}
+
+.top-margin {
+  margin-top: calc(var(--padding)*11);
 }
 
 #added-to-basket-new-right-col-subtotal-text {
@@ -670,3 +681,8 @@ p {
   opacity: 0.5;
   margin-top: calc(var(--padding)*10);
  }
+
+#added-to-basket-new-right-col-img-container img{
+  margin-top: calc(var(--padding)*30);
+  width: calc(var(--card-width)*0.3)  ;
+}

@@ -41,9 +41,13 @@ const AddedToBasketPage = (props) => {
             </div>
             <div id='added-to-basket-new-right-col'> 
                 <p id='added-to-basket-new-right-col-subtotal-text'>Subtotal</p>
-                <h4 id='added-to-basket-new-right-col-current-price'>${current_price}</h4>
+                <h4 id='added-to-basket-new-right-col-current-price' className='classic-price-display dark-orange'>${current_price}</h4>
                 <GoToBasketButton />
                 <div className='horizontal-line'></div>
+                <div id='added-to-basket-new-right-col-img-container'>
+                    <img src={recentlyAddedProduct.main_image} alt="" />
+                </div>
+                <h4 id='added-to-basket-new-right-col-current-price' className='classic-price-display black top-margin'>${current_price}</h4>
             </div>
         </div>
     )
