@@ -1,6 +1,7 @@
 import React from 'react'
 import PriceDisplay from './PriceDisplay'
 import Header from './Header'
+import BuyButtons from './BuyButtons'
 
 const AddedToBasketPage = (props) => {
 
@@ -23,17 +24,25 @@ const AddedToBasketPage = (props) => {
 
     return (
         <div id='added-to-basket-page-container'>
-            <Header addedPage={true} />
-            <div id='added-to-basket-cols-container'>
-                <div id='added-to-basket-left-col'>
-                    <img src={recentlyAddedProduct.main_image} alt="" />
-                    <h3>Added To Cart</h3>
+            <div id='added-to-basket-narrowed-page'>
+                <Header addedPage={true} />
+                <div id='added-to-basket-narrowed-page-cols'>
+                    <div id='added-to-basket-narrowed-page-left-col'>
+                        <img src={recentlyAddedProduct.main_image} alt="" />
+                        <h3>Added To Cart</h3>
+                    </div>
+                    <div id='added-to-basket-narrowed-page-right-col'>
+                        <div>Card Subtotal: <PriceDisplay price={current_price} /> </div>
+                        <div>Proceed to checkout</div>
+                        <div>Go to Basket</div>
+                    </div>
                 </div>
-                <div id='added-to-basket-right-col'>
-                    <div>Card Subtotal: <PriceDisplay price={current_price} /> </div>
-                    <div>Proceed to checkout</div>
-                    <div>Go to Basket</div>
-                </div>
+            </div>
+            <div id='added-to-basket-new-right-col'> 
+                <p>Subtotal</p>
+                <h5 style={{color: "#DD5500"}}>${current_price}</h5>
+                {/* <GoToCartButton/> */}
+                <hr />
             </div>
         </div>
     )

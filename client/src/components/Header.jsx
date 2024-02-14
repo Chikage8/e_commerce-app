@@ -20,7 +20,7 @@ function Header(props, {category, setCategoryApp}) {
 
     function RenderLeftArrow({addedPage}) {
         if (addedPage) {
-            return <li className="svg-container"><LeftArrow/></li>
+            return <li id="added-to-basket-arrow" className="svg-container"><LeftArrow/></li>
         }
     }
 
