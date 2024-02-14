@@ -40,7 +40,7 @@ const AddedToBasketPage = (props) => {
             </div>
             <div id='added-to-basket-new-right-col'> 
                 <p id='added-to-basket-new-right-col-subtotal-text'>Subtotal</p>
-                <h5 id='added-to-basket-new-right-col-current-price'>${current_price}</h5>
+                <h4 id='added-to-basket-new-right-col-current-price'>${current_price}</h4>
                 {/* <GoToCartButton/> */}
                 <hr />
             </div>
