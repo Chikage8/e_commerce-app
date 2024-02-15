@@ -3,7 +3,8 @@ import PriceDisplay from './PriceDisplay'
 import Header from './Header'
 import BuyButtons from './BuyButtons'
 import GoToBasketButton from './GoToBasketButton'
-import { ReactComponent as DownArrow } from "../icons/down-arrow.svg"
+import { ReactComponent as DownArrow } from '../icons/down-arrow.svg'
+import { ReactComponent as TrashCan } from '../icons/trash-can.svg'
 
 const AddedToBasketPage = (props) => {
 
@@ -51,6 +52,7 @@ const AddedToBasketPage = (props) => {
                 <h4 id='added-to-basket-new-right-col-current-price' className='classic-price-display black top-margin'>${current_price}</h4>
                 <div className='quantity-selector-div'>
                     <button className='quantity-selector-button' href=""> <p>1</p> <DownArrow /> </button>
+                    <TrashCan />
                 </div>
             </div>
         </div>

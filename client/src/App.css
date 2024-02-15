@@ -687,6 +687,20 @@ p {
   width: calc(var(--card-width)*0.3)  ;
 }
 
+.quantity-selector-div {
+  display: inline;
+  margin: 0;
+}
+
+.quantity-selector-div > svg:last-child{
+  display: inline;
+  width: 18px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  /* margin-top: 100px; */
+}
+
 .quantity-selector-button {
   width: 48px;
   height: 20px;
@@ -694,8 +708,7 @@ p {
   border-width: 1px;
   border-radius: 36px;
   padding: 0;
-  margin-right: 50px;
-  margin-top: 20px;
+  margin-right: 30px;
 }
 
 .quantity-selector-button p {
