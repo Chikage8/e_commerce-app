@@ -49,11 +49,14 @@ const AddedToBasketPage = (props) => {
                 <div id='added-to-basket-new-right-col-img-container'>
                     <img src={recentlyAddedProduct.main_image} alt="" />
                 </div>
-                <h4 id='added-to-basket-new-right-col-current-price' className='classic-price-display black top-margin'>${current_price}</h4>
+                <h4 id='added-to-basket-new-right-col-current-price' className='classic-price-display black top-margin bot-margin'>${current_price}</h4>
                 <div className='quantity-selector-div'>
                     <button className='quantity-selector-button' href=""> <p>1</p> <DownArrow /> </button>
-                    <TrashCan />
+                    <div id='trash-can-border'>
+                        <TrashCan />
+                    </div>
                 </div>
+                <div className='horizontal-line'></div>
             </div>
         </div>
     )
