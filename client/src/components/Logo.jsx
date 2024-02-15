@@ -1,4 +1,4 @@
-import { ReactComponent as LogoIcon } from './usb-icon.svg';
+import { ReactComponent as LogoIcon } from '../icons/usb-icon.svg';
 import React from 'react';
 
 function Logo(props) {
