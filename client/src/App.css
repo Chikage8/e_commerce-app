@@ -646,9 +646,13 @@ p {
   color: black;
 }
 
+.small-top-margin {
+  margin-top: calc(var(--padding)*6);
+}
+
 .top-margin {
   margin-top: calc(var(--padding)*11);
-}
+} 
 
 #added-to-basket-new-right-col-subtotal-text {
   margin-top: calc(var(--padding)*12);
@@ -747,8 +751,29 @@ p {
 }
 
 #quantity-selector-dropdown {
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  border: solid #AAAAAA 1px;
+  background-color: #FFFFFF;
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+  z-index: 100;
+  top: 245px;
+  right: 70px;
+}
+
+.select-quantity-dropdown-option {
+  border: hidden;
+  width: 90px;
+  height: 18px;
+  padding: 5px;
+}
+
+.select-quantity-dropdown-option:hover {
+  background-color: #DDDDDD;
+  border: solid #CCCCCC 1px;
 }
