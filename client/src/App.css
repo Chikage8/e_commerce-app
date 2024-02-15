@@ -777,3 +777,26 @@ p {
   background-color: #DDDDDD;
   border: solid #CCCCCC 1px;
 }
+
+#basket-content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;   
+  gap: 20px;
+  padding-top: 20px;
+}
+
+#basket-content-left-col {
+  background-color: blue;
+  color: blue;
+  width: 61%;
+  height: 1080px;
+}
+
+#basket-content-right-col {
+  background-color: yellow;
+  color: yellow;
+  width: 16%;
+  height: 1080px;
+}
