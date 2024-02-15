@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import PriceDisplay from './PriceDisplay'
 import Header from './Header'
 import BuyButtons from './BuyButtons'
 import GoToBasketButton from './GoToBasketButton'
 import { ReactComponent as DownArrow } from '../icons/down-arrow.svg'
 import { ReactComponent as TrashCan } from '../icons/trash-can.svg'
+import SelectQuantityDropDown from './SelectQuantityDropDown'
 
 const AddedToBasketPage = (props) => {
 
@@ -24,6 +25,9 @@ const AddedToBasketPage = (props) => {
 
     let recentlyAddedProduct = productsInBasket[productsInBasket.length-1]
     let current_price = (recentlyAddedProduct.list_price*(1-(recentlyAddedProduct.discount_percentage/100))).toFixed(2)
+
+    const [selectQuantity, setSelectQuantity] = useState(false);
+    const [quantity, setQuantity] = useState(1);
 
     return (
         <div id='added-to-basket-page-container'>
@@ -51,7 +55,7 @@ const AddedToBasketPage = (props) => {
                 </div>
                 <h4 id='added-to-basket-new-right-col-current-price' className='classic-price-display black top-margin bot-margin'>${current_price}</h4>
                 <div className='quantity-selector-div'>
-                    <button className='quantity-selector-button' href=""> <p>1</p> <DownArrow /> </button>
+                    <button className='quantity-selector-button' href="" onClick={()=>setSelectQuantity(!selectQuantity)}> {selectQuantity && <SelectQuantityDropDown />} {!selectQuantity && <div> <p>{quantity}</p> <DownArrow /> </div>} </button>
                     <div id='trash-can-border'>
                         <TrashCan />
                     </div>
