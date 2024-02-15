@@ -1,10 +1,11 @@
 import React from 'react'
+import ShoppingBasket from './ShoppingBasket'
 
 const ShoppingBasketPageContent = () => {
   return (
     <div id='basket-content-container'>
         <div id='basket-content-left-col'>
-          {/* <ShoppingBasket /> */}
+          <ShoppingBasket />
         </div>
         <div id='basket-content-right-col'>
 
