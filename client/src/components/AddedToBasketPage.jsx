@@ -47,15 +47,15 @@ const AddedToBasketPage = (props) => {
             </div>
             <div id='added-to-basket-new-right-col'> 
                 <p id='added-to-basket-new-right-col-subtotal-text'>Subtotal</p>
-                <h4 id='added-to-basket-new-right-col-current-price' className='classic-price-display dark-orange'>${current_price}</h4>
+                <h4 id='added-to-basket-new-right-col-current-price' className='classic-price-display dark-orange'>${current_price*quantity}</h4>
                 <GoToBasketButton />
                 <div className='horizontal-line'></div>
                 <div id='added-to-basket-new-right-col-img-container'>
                     <img src={recentlyAddedProduct.main_image} alt="" />
                 </div>
-                <h4 id='added-to-basket-new-right-col-current-price' className='classic-price-display black top-margin bot-margin'>${current_price}</h4>
+                <h4 id='added-to-basket-new-right-col-current-price' className='classic-price-display black top-margin bot-margin'>${current_price*quantity}</h4>
                 <div className='quantity-selector-div'>
-                    <button className='quantity-selector-button' href="" onClick={()=>setSelectQuantity(!selectQuantity)}> {selectQuantity && <SelectQuantityDropDown />} {!selectQuantity && <div> <p>{quantity}</p> <DownArrow /> </div>} </button>
+                    <button className='quantity-selector-button' href="" onClick={()=>setSelectQuantity(!selectQuantity)}> {selectQuantity && <SelectQuantityDropDown setQuantity={setQuantity} setSelectQuantity={setSelectQuantity} />} {!selectQuantity && <div> <p>{quantity}</p> <DownArrow /> </div>} </button>
                     <div id='trash-can-border'>
                         <TrashCan />
                     </div>

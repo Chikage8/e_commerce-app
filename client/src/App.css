@@ -745,3 +745,10 @@ p {
 .bot-margin {
   margin-bottom: 18px;
 }
+
+#quantity-selector-dropdown {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
