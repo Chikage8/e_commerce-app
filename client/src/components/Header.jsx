@@ -14,7 +14,7 @@ import { ReactComponent as Tablet } from '../icons/tablet.svg';
 import { ReactComponent as LeftArrow} from '../icons/left-arrow.svg';
 import SearchBar from "./SearchBar.jsx";
 import React, { useContext } from "react";
-import ShoppingBasket from "./ShoppingBasket.jsx";
+import ShoppingBasketIcon from "./ShoppingBasketIcon.jsx";
 
 function Header(props, {category, setCategoryApp}) {
 
@@ -39,7 +39,7 @@ function Header(props, {category, setCategoryApp}) {
             </NavMenuItem>
             <SearchBar/>
             <SignInMenuItem />
-            <ShoppingBasket />
+            <ShoppingBasketIcon />
             <RenderLeftArrow addedPage={props.addedPage} />
         </Navbar>
     );
