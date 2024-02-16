@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import BasketItemLeftCol from './BasketItemLeftCol'
 import PropValueInfo from './PropValueInfo'
 import QuantitySelector from './QuantitySelector'
@@ -8,6 +8,7 @@ const BasketItem = (props) => {
 
     const [quantity, setQuantity] = useState(1)
     const [selectQuantity, setSelectQuantity] = useState(false)
+    
     let current_price = (props.item.list_price*(1-(props.item.discount_percentage/100))).toFixed(2)
     let classes = ["basket-item-right-col-price"]
 

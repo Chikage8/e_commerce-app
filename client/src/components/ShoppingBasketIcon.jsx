@@ -4,12 +4,17 @@ import { ReactComponent as Basket} from '../icons/shopping-basket.svg';
 const ShoppingBasket = () => {
 
   const user = JSON.parse(localStorage.getItem('user'));
+  let userId;
+  if(user) {
+    userId = user.user.id
+  }
 
   user.user.basket = []
 
   for (let i = 0; i < localStorage.length; i++) {
-    if (localStorage.key(i).substring(0,7) == 'basket/') {
-      user.user.basket.push(localStorage.getItem(localStorage.key(i)))
+    if (localStorage.key(i).substring(0,7) == `basket/`) {
+      if (localStorage.key(i).split('/')[1] == userId)
+        user.user.basket.push(localStorage.getItem(localStorage.key(i)))
     } 
   }
 

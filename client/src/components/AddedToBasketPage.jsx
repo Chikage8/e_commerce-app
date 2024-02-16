@@ -13,9 +13,16 @@ const AddedToBasketPage = (props) => {
     let productsInBasketIds = []
     let productsInBasket = []
 
+    const user = JSON.parse(localStorage.getItem('user'));
+    let userId;
+    if(user) {
+        userId = user.user.id
+    }
+
     for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i).substring(0,6) == 'basket') {
-            productsInBasketIds.push(parseInt(localStorage.key(i)[7]))
+        if (localStorage.key(i).substring(0,7) == 'basket/') {
+            if (userId == localStorage.key(i).split('/')[1])
+                productsInBasketIds.push(parseInt(localStorage.key(i).split('/')[2]))
         }
     }
 

@@ -2,9 +2,15 @@ import React from 'react'
 
 const DeselectItems = (props) => {
 
+  const user = JSON.parse(localStorage.getItem('user'));
+  let userId;
+  if(user) {
+    userId = user.user.id
+  }
+
   const onClick  = () => {
     props.checkedProducts.forEach(checkedProduct => {
-       localStorage.removeItem(`basket/${checkedProduct}`) 
+       localStorage.removeItem(`basket/${userId}/${checkedProduct}`) 
     });
   }
 
