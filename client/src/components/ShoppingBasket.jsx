@@ -44,9 +44,7 @@ const ShoppingBasket = (props) => {
         <div className='end-of-line'><p>Price</p></div>
         <div className='horizontal-line'></div>
         <div id='shopping-basket-content'>
-
           {basketItems}
-
         </div>
     </div>
   )

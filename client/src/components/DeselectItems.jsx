@@ -10,7 +10,7 @@ const DeselectItems = (props) => {
 
   return (
     <div id='deselect-items-container'>
-        <a href="" onClick={onClick}>Deselect Items</a>
+        <a href="" onClick={onClick}> <h3 style={{color:"lightblue"}}> Deselect Items </h3> </a>
     </div>
   )
 }

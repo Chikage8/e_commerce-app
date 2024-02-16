@@ -13,9 +13,9 @@ const BasketItemLeftCol = (props) => {
     }
 
     return (
-        <div>
+        <div id='basket-item-left-col'>
             <input type="checkbox" name={`shopping-basket-deselect-checkbox${props.item.id}`} id={`shopping-basket-deselect-checkbox${props.item.id}`} onChange={onCheckboxChange} />
-            <img key={`${props.item.id}`} id='shopping-basket-img' src={props.item.main_image} alt="" /> 
+            <img key={`${props.item.id}`} id='basket-item-img' src={props.item.main_image} alt="" /> 
         </div>
     )
 }
