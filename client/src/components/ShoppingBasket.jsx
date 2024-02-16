@@ -2,8 +2,9 @@ import React, {useState} from 'react'
 import DeselectItems from './DeselectItems'
 import PropValueInfo from './PropValueInfo'
 import QuantitySelector from './QuantitySelector'
+import BasketItem from './BasketItem'
 
-const ShoppingBasket = () => {
+const ShoppingBasket = (props) => {
 
   let basketItemIds = []
   let basketItemDisplays = []
@@ -29,41 +30,22 @@ const ShoppingBasket = () => {
 
   const [selectQuantity, setSelectQuantity] = useState(false);
   const [quantity, setQuantity] = useState(1);
+
+  let basketItems = []
+
+  basketProducts.forEach((product) => {
+    basketItems.push(<BasketItem key={product.id} item={product} checkedProducts={props.checkedProducts} />)
+  })
   
-  // checked items in the basket go into this array for potential deselection
-  let deselectable = []
-
-  const onCheckboxChange = (e) => {
-    if (e.target.checked) {
-      let itemKey = e.target.id.charAt(e.target.id.length-1) // get the item key corresponding to the checkbox
-      // deselectable.push()
-    }
-  }
-
   return (
     <div id='shopping-basket-container'>
         <h1 id='shopping-basket-title'>Shopping Basket</h1>
-        <DeselectItems />
+        <DeselectItems checkedProducts={props.checkedProducts}/>
         <div className='end-of-line'><p>Price</p></div>
         <div className='horizontal-line'></div>
         <div id='shopping-basket-content'>
 
-          <div id='shopping-basket-left-col'>
-            <input type="checkbox" name={`shopping-basket-deselect-checkbox${basketProducts[0].id}`} id={`shopping-basket-deselect-checkbox${basketProducts[0].id}`} onChange={onCheckboxChange} />
-            <img key={`${basketProducts[0].id}`} id='shopping-basket-img' src={basketProducts[0].main_image} alt="" /> 
-          </div>
-
-          <div id='shopping-basket-right-col'>
-            <p id='product-detailed-title'> {basketProducts[0].detailed_title} </p>
-            <div id='climate-friendly-badge-wrapper'>
-              <img id='climate-friendly-badge' src="https://m.media-amazon.com/images/I/111pigi1ylL.png" alt="" />
-              <p id='climate-friendly-text'>Climate Pledge Friendly</p>
-            </div>
-            <PropValueInfo prop='Brand' value='Logitech' />
-            <PropValueInfo prop='Color' value='Black' />
-            <PropValueInfo prop='Special Features' value={basketProducts[0].features} />
-            <QuantitySelector selectQuantity={selectQuantity} setSelectQuantity={setSelectQuantity} quantity={quantity} setQuantity={setQuantity} />
-          </div>
+          {basketItems}
 
         </div>
     </div>
