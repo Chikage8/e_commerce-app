@@ -29,6 +29,16 @@ const ShoppingBasket = () => {
 
   const [selectQuantity, setSelectQuantity] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  
+  // checked items in the basket go into this array for potential deselection
+  let deselectable = []
+
+  const onCheckboxChange = (e) => {
+    if (e.target.checked) {
+      let itemKey = e.target.id.charAt(e.target.id.length-1) // get the item key corresponding to the checkbox
+      // deselectable.push()
+    }
+  }
 
   return (
     <div id='shopping-basket-container'>
@@ -37,9 +47,12 @@ const ShoppingBasket = () => {
         <div className='end-of-line'><p>Price</p></div>
         <div className='horizontal-line'></div>
         <div id='shopping-basket-content'>
+
           <div id='shopping-basket-left-col'>
-            <img id='shopping-basket-img' src={basketProducts[0].main_image} alt="" /> 
+            <input type="checkbox" name={`shopping-basket-deselect-checkbox${basketProducts[0].id}`} id={`shopping-basket-deselect-checkbox${basketProducts[0].id}`} onChange={onCheckboxChange} />
+            <img key={`${basketProducts[0].id}`} id='shopping-basket-img' src={basketProducts[0].main_image} alt="" /> 
           </div>
+
           <div id='shopping-basket-right-col'>
             <p id='product-detailed-title'> {basketProducts[0].detailed_title} </p>
             <div id='climate-friendly-badge-wrapper'>
@@ -51,6 +64,7 @@ const ShoppingBasket = () => {
             <PropValueInfo prop='Special Features' value={basketProducts[0].features} />
             <QuantitySelector selectQuantity={selectQuantity} setSelectQuantity={setSelectQuantity} quantity={quantity} setQuantity={setQuantity} />
           </div>
+
         </div>
     </div>
   )
