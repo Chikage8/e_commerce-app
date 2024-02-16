@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import DeselectItems from './DeselectItems'
 import PropValueInfo from './PropValueInfo'
+import QuantitySelector from './QuantitySelector'
 
 const ShoppingBasket = () => {
 
@@ -26,8 +27,8 @@ const ShoppingBasket = () => {
     })
   })
 
-
-  
+  const [selectQuantity, setSelectQuantity] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <div id='shopping-basket-container'>
@@ -48,6 +49,7 @@ const ShoppingBasket = () => {
             <PropValueInfo prop='Brand' value='Logitech' />
             <PropValueInfo prop='Color' value='Black' />
             <PropValueInfo prop='Special Features' value={basketProducts[0].features} />
+            <QuantitySelector selectQuantity={selectQuantity} setSelectQuantity={setSelectQuantity} quantity={quantity} setQuantity={setQuantity} />
           </div>
         </div>
     </div>

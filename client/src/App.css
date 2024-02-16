@@ -750,7 +750,7 @@ p {
 }
 
 #quantity-selector-dropdown {
-  position: absolute;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -761,8 +761,8 @@ p {
   height: auto;
   border-radius: 8px;
   z-index: 100;
-  top: 245px;
-  right: 70px;
+  bottom: 1px;
+  right: 45px;
 }
 
 .select-quantity-dropdown-option {
@@ -838,4 +838,13 @@ p {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+
+#shopping-basket-right-col {
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+
 }
