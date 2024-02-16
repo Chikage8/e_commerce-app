@@ -5,7 +5,15 @@ const ShoppingBasket = () => {
 
   const user = JSON.parse(localStorage.getItem('user'));
 
-  user.user.basket = [1, 2, 3];
+  user.user.basket = []
+
+  for (let i = 0; i < localStorage.length; i++) {
+    if (localStorage.key(i).substring(0,7) == 'basket/') {
+      user.user.basket.push(localStorage.getItem(localStorage.key(i)))
+    } 
+  }
+
+  console.log(user.user.basket)
 
   return (
     <div id='shoppingbasket-component-container'>
