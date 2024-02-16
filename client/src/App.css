@@ -840,11 +840,22 @@ p {
   align-items: center;
 }
 
+#shopping-basket-left-col {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  margin-left: 1rem;
+}
+
 #shopping-basket-right-col {
   margin-left: 15px;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: start;
+}
 
+#shopping-basket-img {
+  width: 15rem;
 }

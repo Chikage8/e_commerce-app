@@ -38,7 +38,7 @@ const ShoppingBasket = () => {
         <div className='horizontal-line'></div>
         <div id='shopping-basket-content'>
           <div id='shopping-basket-left-col'>
-            <img src={basketProducts[0].main_image} alt="" /> 
+            <img id='shopping-basket-img' src={basketProducts[0].main_image} alt="" /> 
           </div>
           <div id='shopping-basket-right-col'>
             <p id='product-detailed-title'> {basketProducts[0].detailed_title} </p>
