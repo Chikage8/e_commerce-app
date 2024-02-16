@@ -6,6 +6,7 @@ import GoToBasketButton from './GoToBasketButton'
 import { ReactComponent as DownArrow } from '../icons/down-arrow.svg'
 import { ReactComponent as TrashCan } from '../icons/trash-can.svg'
 import SelectQuantityDropDown from './SelectQuantityDropDown'
+import QuantitySelector from './QuantitySelector'
 
 const AddedToBasketPage = (props) => {
 
@@ -54,12 +55,7 @@ const AddedToBasketPage = (props) => {
                     <img src={recentlyAddedProduct.main_image} alt="" />
                 </div>
                 <h4 id='added-to-basket-new-right-col-current-price' className='classic-price-display black top-margin bot-margin'>${current_price*quantity}</h4>
-                <div className='quantity-selector-div'>
-                    <button className='quantity-selector-button' href="" onClick={()=>setSelectQuantity(!selectQuantity)}> {selectQuantity && <SelectQuantityDropDown setQuantity={setQuantity} setSelectQuantity={setSelectQuantity} />} {!selectQuantity && <div> <p>{quantity}</p> <DownArrow /> </div>} </button>
-                    <div id='trash-can-border'>
-                        <TrashCan />
-                    </div>
-                </div>
+                <QuantitySelector selectQuantity={selectQuantity} setSelectQuantity={setSelectQuantity} quantity={quantity} setQuantity={setQuantity} />
                 <div className='horizontal-line top-margin'></div>
             </div>
         </div>
