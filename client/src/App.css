@@ -832,3 +832,10 @@ p {
 #deselect-items-container {
   margin-left: 2rem;
 }
+
+#shopping-basket-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
