@@ -25,6 +25,8 @@ const ShoppingBasket = (props) => {
         key={product.id}
         item={product}
         checkedProducts={props.checkedProducts}
+        quantity={props.quantity}
+        childSetQuantity={props.childSetQuantity}
       />
     );
   });

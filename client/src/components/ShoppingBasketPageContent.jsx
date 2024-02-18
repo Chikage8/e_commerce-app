@@ -3,6 +3,12 @@ import ShoppingBasket from "./ShoppingBasket";
 import PriceDisplay from "./PriceDisplay";
 
 const ShoppingBasketPageContent = (props) => {
+
+  const [quantity, setQuantity] = useState()
+  const childSetQuantity = (value) => {
+    setQuantity(value)
+  }
+
   let checkedProducts = [];
 
   let products = JSON.parse(localStorage.getItem("products"));
@@ -91,6 +97,8 @@ const ShoppingBasketPageContent = (props) => {
         <ShoppingBasket
           checkedProducts={checkedProducts}
           basketItemIds={basketItemIds}
+          quantity={quantity}
+          childSetQuantity={childSetQuantity}
         />
       </div>
       <div id="basket-content-right-col">

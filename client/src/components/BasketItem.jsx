@@ -8,8 +8,6 @@ const BasketItem = (props) => {
   //   const [quantity, setQuantity] = useState(1);
   const [selectQuantity, setSelectQuantity] = useState(false);
 
-  let quantity;
-
   const user = JSON.parse(localStorage.getItem("user"));
   let userId;
   if (user) {
@@ -20,7 +18,8 @@ const BasketItem = (props) => {
     localStorage.getItem(`basket/${userId}/${props.item.id}`)
   );
 
-  quantity = currentObject.quantity;
+  props.childSetQuantity(currentObject.quantity)
+  // props.quantity = currentObject.quantity;
 
   let current_price = (
     props.item.list_price *
@@ -53,14 +52,14 @@ const BasketItem = (props) => {
         <PropValueInfo prop="Special Features" value={props.item.features} />
         <QuantitySelector
           item={props.item}
-          quantity={quantity}
+          quantity={props.quantity}
           selectQuantity={selectQuantity}
           setSelectQuantity={setSelectQuantity}
         />
       </div>
 
       <div id="basket-item-right-col">
-        <PriceDisplay price={current_price * quantity} classes={classes} />
+        <PriceDisplay price={current_price * props.quantity} classes={classes} />
       </div>
     </div>
   );
