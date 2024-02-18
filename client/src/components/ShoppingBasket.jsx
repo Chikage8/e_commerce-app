@@ -6,20 +6,10 @@ import BasketItem from "./BasketItem";
 
 const ShoppingBasket = (props) => {
   let products = JSON.parse(localStorage.getItem("products"));
-  let basketProducts = []; // basket product info will be stored here
-
-  // get the product information for the items in basket
-  props.basketItemIds.forEach((id) => {
-    products.forEach((product) => {
-      if (id == product.id) {
-        basketProducts.push(product);
-      }
-    });
-  });
 
   let basketItems = [];
 
-  basketProducts.forEach((product) => {
+  props.basketProducts.forEach((product) => {
     basketItems.push(
       <BasketItem
         key={product.id}
