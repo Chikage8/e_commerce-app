@@ -1,33 +1,7 @@
 import React from "react";
 import { ReactComponent as Basket } from "../icons/shopping-basket.svg";
 
-const ShoppingBasketIcon = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  let userId;
-  if (user) {
-    userId = user.user.id;
-  }
-  let userBasketLength = 0;
-  for (let i = 0; i < localStorage.length; i++) {
-    if (
-      localStorage.key(i).substring(0, 7) == `basket/` &&
-      localStorage.key(i).split("/")[1] == userId &&
-      localStorage.key(i).split("/").length > 2 &&
-      localStorage.key(i).split("/")[2] !== "undefined"
-    ) {
-      console.log(
-        JSON.parse(
-          localStorage.getItem(
-            `basket/${localStorage.key(i).split("/")[1]}/${
-              localStorage.key(i).split("/")[2]
-            }`
-          )
-        )
-      );
-      userBasketLength++;
-    }
-  }
-  // console.log(user.user.basket);
+const ShoppingBasketIcon = (props) => {
   return (
     <div id="shoppingbasket-component-container">
       <a href="/basket" className="clickable">
@@ -37,7 +11,7 @@ const ShoppingBasketIcon = () => {
           </div>
           <p> My Basket </p>
           <div id="basketItemCount-container">
-            <div> {userBasketLength} </div>
+            <div> {props.quantity} </div>
           </div>
         </div>
       </a>

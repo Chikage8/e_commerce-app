@@ -5,19 +5,6 @@ import QuantitySelector from "./QuantitySelector";
 import BasketItem from "./BasketItem";
 
 const ShoppingBasket = (props) => {
-  let basketItems = [];
-
-  props.basketProducts.forEach((product) => {
-    basketItems.push(
-      <BasketItem
-        key={product.id}
-        item={product}
-        checkedProducts={props.checkedProducts}
-        quantity={props.quantity}
-        childSetQuantity={props.childSetQuantity}
-      />
-    );
-  });
 
   return (
     <div id="shopping-basket-container">
@@ -27,7 +14,7 @@ const ShoppingBasket = (props) => {
         <p>Price</p>
       </div>
       <div className="horizontal-line"></div>
-      <div id="shopping-basket-content">{basketItems}</div>
+      <div id="shopping-basket-content">{props.basketItems}</div>
     </div>
   );
 };

@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Logo from "./Logo";
 import Navbar from "./Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../App.js"
 
 function SignInPage(props) {
   const emailPattern = /^\D+[\w]{3,}[@][\D]{2,}[.][\D]{2,}$/;
   const passwordPattern = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+
+  const [user, setUser] = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -33,14 +36,13 @@ function SignInPage(props) {
       setWarning(null);
       setMailWarning(null);
       setPasswordWarning(null);
-      axios
-        .post("http://localhost:5000/signin", {
+      axios.post("http://localhost:5000/signin", {
           email: { email },
           password: { password },
         })
         .then((response) => {
           typeof response.data == "object"
-            ? localStorage.setItem("user", JSON.stringify(response.data))
+            ? setUser(response.data.user)                                      // localStorage.setItem("user", JSON.stringify(response.data))
             : setWarning(
                 "This email and password combination is not registered to our services"
               );

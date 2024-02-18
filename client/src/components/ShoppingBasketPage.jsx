@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Header from "./Header.jsx";
 import ShoppingBasketPageContent from "./ShoppingBasketPageContent.jsx";
+import BasketItem from "./BasketItem.jsx";
 
 const ShoppingBasketPage = () => {
 
@@ -67,6 +68,20 @@ const ShoppingBasketPage = () => {
     item_count += objectQuantity;
     totalPrice += objectTotalPrice;
   }
+
+  let basketItems = []
+
+  basketProducts.forEach((product) => {
+    basketItems.push(
+      <BasketItem
+        key={product.id}
+        item={product}
+        checkedProducts={checkedProducts}
+        quantity={quantity}
+        childSetQuantity={childSetQuantity}
+      />
+    );
+  });
   
   let itemText = 'item'
   if (parseInt(item_count) > 1) {
@@ -75,7 +90,7 @@ const ShoppingBasketPage = () => {
 
   return (
     <div>
-      <Header />
+      <Header quantity={quantity} />
       <ShoppingBasketPageContent 
         quantity={quantity}
         childSetQuantity={childSetQuantity} 
@@ -84,6 +99,7 @@ const ShoppingBasketPage = () => {
         userId={userId}  
         userBasket={userBasket}
         basketItemIds={basketItemIds}
+        basketItems={basketItems}
         totalPrice={totalPrice}
         item_count={item_count}
         itemText={itemText}

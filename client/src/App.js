@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useRef, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./components/HomePage.jsx";
 import SignInPage from "./components/SignInPage.jsx";
@@ -8,18 +8,21 @@ import ShoppingBasketPage from "./components/ShoppingBasketPage.jsx";
 import ProductPage from "./components/ProductPage.jsx";
 import AddedToBasketPage from "./components/AddedToBasketPage.jsx";
 
+export const UserContext = React.createContext({});
+
 function App() {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
   useEffect(() => {
     fetch("http://localhost:5000/")
       .then((response) => response.json())
       .then((data) => localStorage.setItem("products", JSON.stringify(data)));
-  }, []);
+    }, []);
+    
+    const [products, setProducts] = useState(
+      JSON.parse(localStorage.getItem("products"))
+      );
 
-  const [products, setProducts] = useState(
-    JSON.parse(localStorage.getItem("products"))
-  );
-
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
 
   let productRoutes = [];
@@ -38,17 +41,19 @@ function App() {
   }
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" exact element={<HomePage />} />
-          <Route path="/signin" element={<SignInPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/basket" element={<ShoppingBasketPage />} />
-          <Route path="/added" element={<AddedToBasketPage />} />
-          {productRoutes}
-          {/* <Route path="/mouse" element={<ProductPage />} /> */}
-        </Routes>
-      </Router>
+      <UserContext.Provider value={[user, setUser]}>
+        <Router>
+          <Routes>
+            <Route path="/" exact element={<HomePage />} />
+            <Route path="/signin" element={<SignInPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/basket" element={<ShoppingBasketPage />} />
+            <Route path="/added" element={<AddedToBasketPage />} />
+            {productRoutes}
+            {/* <Route path="/mouse" element={<ProductPage />} /> */}
+          </Routes>
+        </Router>
+      </UserContext.Provider>
     </div>
   );
 }

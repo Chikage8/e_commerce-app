@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Logo from "./Logo";
 import Navbar from "./Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../App.js"
 
 function RegisterPage(props) {
   const namePattern = /^[a-zA-Z]{2,}$/;
   const emailPattern = /^\D+[\w]{3,}[@][\D]{2,}[.][\D]{2,}$/;
   const passwordPattern = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 
-  const navigate = useNavigate();
+  const [user, setUser] = useContext(UserContext);
 
-  const [userData, setUserData] = useState(null);
+  const navigate = useNavigate();
 
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
@@ -53,7 +54,7 @@ function RegisterPage(props) {
           name: { name },
         })
         .then((response) => {
-          localStorage.setItem("user", response.data);
+          setUser(response.data.user)                                                                  // localStorage.setItem("user", response.data);
           redirect("/");
         })
         .catch((error) => console.log(error));

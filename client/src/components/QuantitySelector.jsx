@@ -13,15 +13,15 @@ const QuantitySelector = (props) => {
   // Get the quantity for the item
   let quantity;
 
-  const currentObject = JSON.parse(
-    localStorage.getItem(`basket/${userId}/${props.item.id}`)
-  );
+  // const currentObject = JSON.parse(
+  //   localStorage.getItem(`basket/${userId}/${props.item.id}`)
+  // );
 
-  console.log(currentObject);
+  // console.log(currentObject);
 
-  quantity = JSON.parse(
-    localStorage.getItem(`basket/${userId}/${props.item.id}`)
-  ).quantity;
+  // quantity = JSON.parse(
+  //   localStorage.getItem(`basket/${userId}/${props.item.id}`)
+  // ).quantity;
 
   return (
     <div>
