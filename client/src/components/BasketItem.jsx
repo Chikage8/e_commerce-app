@@ -18,7 +18,9 @@ const BasketItem = (props) => {
     localStorage.getItem(`basket/${userId}/${props.item.id}`)
   );
 
-  props.childSetQuantity(currentObject.quantity)
+  useEffect(()=> {
+    props.childSetQuantity(currentObject.quantity)
+  },[])
   // props.quantity = currentObject.quantity;
 
   let current_price = (

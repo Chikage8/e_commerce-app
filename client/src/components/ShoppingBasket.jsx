@@ -5,8 +5,6 @@ import QuantitySelector from "./QuantitySelector";
 import BasketItem from "./BasketItem";
 
 const ShoppingBasket = (props) => {
-  let products = JSON.parse(localStorage.getItem("products"));
-
   let basketItems = [];
 
   props.basketProducts.forEach((product) => {

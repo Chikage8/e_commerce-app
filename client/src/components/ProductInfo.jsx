@@ -110,6 +110,8 @@ const ProductInfo = (props) => {
     stars.push(<EmptyStar />);
   }
 
+  let classes = []
+
   return (
     <div id="product-info-container">
       <p id="product-detailed-title"> {product.detailed_title} </p>
@@ -146,7 +148,7 @@ const ProductInfo = (props) => {
         <div id="current-price-div">
           <div id="discount-display-div">-{product.discount_percentage}%</div>
           <div id="discounted-price-div">
-            <PriceDisplay price={current_price} />
+            <PriceDisplay price={current_price} classes={classes} />
           </div>
         </div>
         <div id="original-price-div">

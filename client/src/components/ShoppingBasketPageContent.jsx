@@ -4,7 +4,7 @@ import PriceDisplay from "./PriceDisplay";
 
 const ShoppingBasketPageContent = (props) => {
 
- 
+  let classes = []
 
   return (
     <div id="basket-content-container">
@@ -19,7 +19,7 @@ const ShoppingBasketPageContent = (props) => {
       </div>
       <div id="basket-content-right-col">
         <p>Subtotal({parseInt(props.item_count) + " "}  {props.itemText} ) </p>
-        <PriceDisplay price={props.totalPrice} />
+        <PriceDisplay price={props.totalPrice} classes={classes} />
         <button className="checkout-button">Proceed to checkout</button>
       </div>
     </div>
