@@ -10,7 +10,6 @@ import AddedToBasketPage from "./components/AddedToBasketPage.jsx";
 
 function App() {
   useEffect(() => {
-    console.log("inside useEffect");
     fetch("http://localhost:5000/")
       .then((response) => response.json())
       .then((data) => localStorage.setItem("products", JSON.stringify(data)));
@@ -22,12 +21,9 @@ function App() {
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
-  console.log(user);
 
   let productRoutes = [];
-  console.log(products);
   if (products && products !== null && products !== "undefined") {
-    console.log(products);
     products.map((product, index) => {
       let path = "/" + product.title;
       let route = (
