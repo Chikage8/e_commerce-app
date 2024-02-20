@@ -4,6 +4,7 @@ import DeliverySection from './DeliverySection'
 import StockInfo from './StockInfo'
 import BuyButtons from './BuyButtons'
 import OrderInfo from './OrderInfo'
+import ProductPage from './ProductPage'
 
 const PaymentSection = (props) => {
   let products = JSON.parse(localStorage.getItem('products'))
@@ -15,7 +16,7 @@ const PaymentSection = (props) => {
         <PriceSection id={props.id} current_price={current_price}/>
         <DeliverySection id={props.id} current_price={current_price}/>
         <StockInfo />
-        <BuyButtons id={props.id} current_price={current_price} main_image={main_image} />
+        <BuyButtons id={props.id} product={product} current_price={current_price} />
         <OrderInfo />
     </div>
   )

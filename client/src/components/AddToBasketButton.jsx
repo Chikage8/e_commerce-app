@@ -41,14 +41,14 @@ const AddToBasketButton = (props) => {
           }
           if (newProd) {
             console.log("cc")
-            let newProdObj = {id: thisItemId ,main_image: props.main_image, current_price: props.current_price, quantity: 1}
+            let newProdObj = {id: thisItemId , product: props.product, current_price: props.current_price, quantity: 1}
             user.basket.push(newProdObj)
             sessionStorage.setItem("user", JSON.stringify(user))
           }
         } else {
             console.log("dd")
           // user is present but the user.basket has not yet created
-          let newProdObj = {id: thisItemId ,main_image: props.main_image, current_price: props.current_price, quantity: 1}
+          let newProdObj = {id: thisItemId , product: props.product, current_price: props.current_price, quantity: 1}
           user.basket = [newProdObj]
           sessionStorage.setItem("user", JSON.stringify(user))
           console.log(user)
