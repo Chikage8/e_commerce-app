@@ -88,6 +88,12 @@ const ShoppingBasketPage = () => {
   if (parseInt(item_count) > 1) {
     itemText += 's'
   }
+  console.log(user)
+
+  if (user && 'basket' in user ) {
+    console.log("USER BASKET: ")
+    console.log(user.basket)
+  }
 
   return (
     <div>

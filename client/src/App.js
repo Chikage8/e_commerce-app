@@ -11,10 +11,10 @@ import AddedToBasketPage from "./components/AddedToBasketPage.jsx";
 export const UserContext = React.createContext({});
 
 function App() {
-  
+
   let valueToSetUser
-  if (localStorage.getItem("user") !== undefined && localStorage.getItem("user") !== 'undefined') {
-    valueToSetUser = JSON.parse(localStorage.getItem("user"))
+  if (sessionStorage.getItem("user") !== undefined && sessionStorage.getItem("user") !== 'undefined') {
+    valueToSetUser = JSON.parse(sessionStorage.getItem("user"))
   } else {
     valueToSetUser = undefined
   }
@@ -26,15 +26,14 @@ function App() {
 
   if (typeof user === "object") {
     console.log("setting localstorage user")
-    localStorage.setItem("user", JSON.stringify(user))
+    sessionStorage.setItem("user", JSON.stringify(user))
   }
-  useEffect((user) => { 
+  useEffect(() => { 
     if (typeof user === "object") {
-      console.log("useffect, setting localstorage user")
-      localStorage.setItem("user", JSON.stringify(user))
+      console.log("useffect, storing user info")
+      setUser(user)
+      sessionStorage.setItem("user", JSON.stringify(user))
     }
-    console.log("useffect, user in localstorage: ")
-    console.log(localStorage.getItem("user"))
   }, [user])
   // console.log("user before: ")
   // console.log(user.user)

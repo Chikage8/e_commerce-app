@@ -3,12 +3,12 @@ import React from "react";
 const PriceDisplay = (props) => {
   let additionalClasses = [];
 
-  if (props.classes) {
-    for (let i = 0; i < props.classes.length; i++) {
-      console.log(typeof props.classes[i])
-      additionalClasses.push(props.classes[i]);
-    }
-  }
+  // if (props.classes) {
+  //   for (let i = 0; i < props.classes.length; i++) {
+  //     console.log(typeof props.classes[i])
+  //     additionalClasses.push(props.classes[i]);
+  //   }
+  // }
 
   let priceDecimalPart;
   if (
