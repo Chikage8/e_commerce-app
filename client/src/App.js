@@ -11,7 +11,39 @@ import AddedToBasketPage from "./components/AddedToBasketPage.jsx";
 export const UserContext = React.createContext({});
 
 function App() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  
+  let valueToSetUser
+  if (localStorage.getItem("user") !== undefined && localStorage.getItem("user") !== 'undefined') {
+    valueToSetUser = JSON.parse(localStorage.getItem("user"))
+  } else {
+    valueToSetUser = undefined
+  }
+
+  const [user, setUser] = useState(valueToSetUser);
+  if(typeof user === "object") {
+    console.log(user)
+  }
+
+  if (typeof user === "object") {
+    console.log("setting localstorage user")
+    localStorage.setItem("user", JSON.stringify(user))
+  }
+  useEffect((user) => { 
+    if (typeof user === "object") {
+      console.log("useffect, setting localstorage user")
+      localStorage.setItem("user", JSON.stringify(user))
+    }
+    console.log("useffect, user in localstorage: ")
+    console.log(localStorage.getItem("user"))
+  }, [user])
+  // console.log("user before: ")
+  // console.log(user.user)
+  // const basketAddition = {basket: []}
+  // const userWithBasket = {...user, ...basketAddition}
+  // setUser(userWithBasket)
+  // console.log("user after: ")
+  // console.log(user)
+
 
   useEffect(() => {
     fetch("http://localhost:5000/")

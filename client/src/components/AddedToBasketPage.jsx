@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PriceDisplay from "./PriceDisplay";
 import Header from "./Header";
 import BuyButtons from "./BuyButtons";
@@ -7,24 +7,20 @@ import { ReactComponent as DownArrow } from "../icons/down-arrow.svg";
 import { ReactComponent as TrashCan } from "../icons/trash-can.svg";
 import SelectQuantityDropDown from "./SelectQuantityDropDown";
 import QuantitySelector from "./QuantitySelector";
+import { UserContext } from "../App.js"
 
 const AddedToBasketPage = (props) => {
   let productsInBasketIds = [];
   let productsInBasket = [];
 
-  // Get the user
-  const user = JSON.parse(localStorage.getItem("user"));
-  let userId;
-  if (user) {
-    userId = user.user.id;
-  }
+  const [user, setUser] = useContext(UserContext);
 
   // Store the Ids of the basket items in an array
   for (let i = 0; i < localStorage.length; i++) {
     console.log("a");
     if (
       localStorage.key(i).substring(0, 7) == `basket/` &&
-      localStorage.key(i).split("/")[1] == userId &&
+      localStorage.key(i).split("/")[1] == user.id &&
       localStorage.key(i).split("/").length > 2 &&
       localStorage.key(i).split("/")[2] !== "undefined"
     ) {

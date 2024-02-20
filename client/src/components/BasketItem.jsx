@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import BasketItemLeftCol from "./BasketItemLeftCol";
 import PropValueInfo from "./PropValueInfo";
 import QuantitySelector from "./QuantitySelector";
 import PriceDisplay from "./PriceDisplay";
+import { UserContext } from "../App.js"
 
 const BasketItem = (props) => {
   //   const [quantity, setQuantity] = useState(1);
   const [selectQuantity, setSelectQuantity] = useState(false);
+  const [user, setUser] = useContext(UserContext)
 
-  const user = JSON.parse(localStorage.getItem("user"));
   let userId;
   if (user) {
-    userId = user.user.id;
+    userId = user.id;
   }
 
   const currentObject = JSON.parse(

@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import Header from "./Header.jsx";
 import ShoppingBasketPageContent from "./ShoppingBasketPageContent.jsx";
 import BasketItem from "./BasketItem.jsx";
+import { UserContext } from "../App.js";
 
 const ShoppingBasketPage = () => {
 
@@ -15,10 +16,10 @@ const ShoppingBasketPage = () => {
   let products = JSON.parse(localStorage.getItem("products"));
   let basketProducts = []; // basket product info will be stored here
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useContext(UserContext)
   let userId;
   if (user) {
-    userId = user.user.id;
+    userId = user.id;
   }
 
   console.log("setting user basket as empty array");

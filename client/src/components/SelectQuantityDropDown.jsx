@@ -1,10 +1,11 @@
-import React, { Children } from "react";
+import React, { Children, useContext } from "react";
+import { UserContext } from "../App";
 
 const SelectQuantityDropDown = (props) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useContext(UserContext)
   let userId;
   if (user) {
-    userId = user.user.id;
+    userId = user.id;
   }
 
   console.log(props.item.id);

@@ -18,13 +18,40 @@ const AddToBasketButton = (props) => {
     //   `basket/${userId}/${props.item.id}`,
     //   JSON.stringify(newObject)
     // );
+    if (typeof user === "object") {
+        if ('basket' in user) {
+          // user and its basket is already set, so just add the new item to the array if its new
+          let newProd = true
+          let addedProdId = props.id
+          for ( let i = 0; i < user.basket.length; i++ ) {
+            if(Object.keys(user.basket[i])[0] == addedProdId) {
+              // Item was already in the basket, so just increase the quantity by 1
+              newProd = false
+              user.basket[i].addedProdId.quantity += 1
+              break
+            }
+          }
+          if (newProd) {
+            let newProdObj = {addedProdId: {main_image: props.main_image, current_price: props.current_price, quantity: 1}}
+            user.basket.push(newProdObj)
+          }
+        } else {
+          // user is present but the user.basket has not yet created
+          let newProdObj = {addedProdId: {main_image: props.main_image, current_price: props.current_price, quantity: 1}}
+          user.basket = [newProdObj]
+        }
+    } else {
+      // user is not logged in
+      alert("Please Log In to use your basket")
+    }
+    
 
     
-    props.setSelectQuantity(false);
-    let currentUserBasket 
-    if (user.basket) {
-      currentUserBasket = user.basket
-    }
+    // props.setSelectQuantity(false);
+    // let currentUserBasket 
+    // if (user.basket) {
+    //   currentUserBasket = user.basket
+    // }
     
     
 

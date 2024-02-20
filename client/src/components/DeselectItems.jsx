@@ -5,7 +5,7 @@ const DeselectItems = (props) => {
   const user = JSON.parse(localStorage.getItem('user'));
   let userId;
   if(user) {
-    userId = user.user.id
+    userId = user.id
   }
 
   const onClick  = () => {

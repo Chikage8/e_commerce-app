@@ -1,13 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import SelectQuantityDropDown from "./SelectQuantityDropDown";
 import { ReactComponent as DownArrow } from "../icons/down-arrow.svg";
 import { ReactComponent as TrashCan } from "../icons/trash-can.svg";
+import { UserContext } from "../App.js"
 
 const QuantitySelector = (props) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useContext(UserContext)
   let userId;
   if (user) {
-    userId = user.user.id;
+    userId = user.id;
   }
 
   // Get the quantity for the item
