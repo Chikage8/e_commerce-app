@@ -10,16 +10,13 @@ const ShoppingBasket = (props) => {
   const [user, setUser] = useContext(UserContext)
 
   const products = localStorage.getItem("products")
-  console.log(products)
 
-  if (user && user.basket && products) {
+  let basketItems = []
+
+  if (user && user.basket) {
     for (let i = 0; i < user.basket.length; i++) {
-      for (let j = 0; j < products.length; j++)  {
-      if (user.basket[i].id === products[i]) {
-        console.log(i)
-      }
+      basketItems.push(<BasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} />)
     }
-  }
   }
   
 
@@ -31,7 +28,7 @@ const ShoppingBasket = (props) => {
         <p>Price</p>
       </div>
       <div className="horizontal-line"></div>
-      <div id="shopping-basket-content">{props.basketItems}</div>
+      <div id="shopping-basket-content">{basketItems}</div>
     </div>
   );
 };

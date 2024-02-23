@@ -15,33 +15,23 @@ const BasketItem = (props) => {
     userId = user.id;
   }
 
-  const currentObject = JSON.parse(
-    localStorage.getItem(`basket/${userId}/${props.item.id}`)
-  );
+  console.log(props.checkedProducts)
 
-  useEffect(()=> {
-    props.childSetQuantity(currentObject.quantity)
-  },[])
-  // props.quantity = currentObject.quantity;
-
-  let current_price = (
-    props.item.list_price *
-    (1 - props.item.discount_percentage / 100)
-  ).toFixed(2);
+  let current_price = props.current_price
   let classes = ["basket-item-right-col-price"];
 
   return (
     <div id="basket-item-content">
       <div id="basket-item-left-col-container">
         <BasketItemLeftCol
-          key={props.item.id}
-          item={props.item}
-          checkedProducts={props.checkedProducts}
+          key={props.product.id}
+          product={props.product}
+          // checkedProducts={props.checkedProducts}
         />
       </div>
 
       <div id="basket-item-center-col">
-        <p id="product-detailed-title"> {props.item.detailed_title} </p>
+        <p id="product-detailed-title"> {props.product.detailed_title} </p>
         <div id="climate-friendly-badge-wrapper">
           <img
             id="climate-friendly-badge"
@@ -50,11 +40,11 @@ const BasketItem = (props) => {
           />
           <p id="climate-friendly-text">Climate Pledge Friendly</p>
         </div>
-        <PropValueInfo prop="Brand" value={props.item.brand} />
-        <PropValueInfo prop="Color" value={props.item.color} />
-        <PropValueInfo prop="Special Features" value={props.item.features} />
+        <PropValueInfo prop="Brand" value={props.product.product_brand} />
+        <PropValueInfo prop="Color" value={props.product.color} />
+        <PropValueInfo prop="Special Features" value={props.product.features} />
         <QuantitySelector
-          item={props.item}
+          product={props.product}
           quantity={props.quantity}
           selectQuantity={selectQuantity}
           setSelectQuantity={setSelectQuantity}

@@ -20,19 +20,17 @@ function App() {
   }
 
   const [user, setUser] = useState(valueToSetUser);
+
   if(typeof user === "object") {
     console.log(user)
   }
 
-  if (typeof user === "object") {
-    console.log("setting localstorage user")
-    sessionStorage.setItem("user", JSON.stringify(user))
-  }
   useEffect(() => { 
     if (typeof user === "object") {
       console.log("useffect, storing user info")
       setUser(user)
       sessionStorage.setItem("user", JSON.stringify(user))
+      console.log(user)
     }
   }, [user])
   // console.log("user before: ")

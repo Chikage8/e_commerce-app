@@ -877,3 +877,7 @@ p {
   align-items: start;
   margin-top: 1rem;
 }
+
+#deselect-button {
+  background-color: #FFFFFF;
+}

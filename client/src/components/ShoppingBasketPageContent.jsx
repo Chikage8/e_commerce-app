@@ -10,10 +10,8 @@ const ShoppingBasketPageContent = (props) => {
     <div id="basket-content-container">
       <div id="basket-content-left-col">
         <ShoppingBasket
-          basketItems={props.basketItems}
           basketProducts={props.basketProducts}
           checkedProducts={props.checkedProducts}
-          basketItemIds={props.basketItemIds}
           quantity={props.quantity}
           childSetQuantity={props.childSetQuantity}
         />

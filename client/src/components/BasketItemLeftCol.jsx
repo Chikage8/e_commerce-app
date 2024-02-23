@@ -1,21 +1,32 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { CheckedProducts } from './ShoppingBasketPage'
 
 const BasketItemLeftCol = (props) => {
 
-    const onCheckboxChange = (e) => {   
+    const [checkedProducts, setCheckedProducts] = useContext(CheckedProducts)
+    let checkedProductsCopy = checkedProducts
+
+    console.log(props.product.id)
+    
+    const onCheckboxChange = (e) => {
+        console.log("AAAAA")
+        console.log(e.target.checked)   
+        console.log(props.product.id)
+        console.log(checkedProductsCopy) // SORUN BURDA
         if (e.target.checked) {
-            props.checkedProducts.push(props.item.id)
+            checkedProductsCopy.push(props.product.id)
         } else {
-            props.checkedProducts.filter((product) => {
-                return product !== props.item.id
+            checkedProductsCopy.filter((product) => {
+                return product !== props.product.id
             })
         }
     }
+    console.log(props.product)
 
     return (
         <div id='basket-item-left-col'>
-            <input type="checkbox" name={`shopping-basket-deselect-checkbox${props.item.id}`} id={`shopping-basket-deselect-checkbox${props.item.id}`} onChange={onCheckboxChange} />
-            <img key={`${props.item.id}`} id='basket-item-img' src={props.item.main_image} alt="" /> 
+            <input type="checkbox" name={`shopping-basket-deselect-checkbox${props.product.id}`} id={`shopping-basket-deselect-checkbox${props.product.id}`} onChange={onCheckboxChange} />
+            <img key={`${props.product.id}`} id='basket-item-img' src={props.product.main_image} alt="" /> 
         </div>
     )
 }

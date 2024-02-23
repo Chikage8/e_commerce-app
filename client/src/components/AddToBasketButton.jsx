@@ -36,6 +36,7 @@ const AddToBasketButton = (props) => {
               newProd = false
               user.basket[i].quantity+=1
               sessionStorage.setItem("user", JSON.stringify(user))
+              setUser(user)
               break
             }
           }
@@ -44,6 +45,7 @@ const AddToBasketButton = (props) => {
             let newProdObj = {id: thisItemId , product: props.product, current_price: props.current_price, quantity: 1}
             user.basket.push(newProdObj)
             sessionStorage.setItem("user", JSON.stringify(user))
+            setUser(user)
           }
         } else {
             console.log("dd")
@@ -51,6 +53,7 @@ const AddToBasketButton = (props) => {
           let newProdObj = {id: thisItemId , product: props.product, current_price: props.current_price, quantity: 1}
           user.basket = [newProdObj]
           sessionStorage.setItem("user", JSON.stringify(user))
+          setUser(user)
           console.log(user)
         }
     } else {

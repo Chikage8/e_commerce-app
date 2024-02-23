@@ -13,6 +13,17 @@ const QuantitySelector = (props) => {
 
   // Get the quantity for the item
   let quantity;
+ 
+  if (user && user.basket) { // check against errors
+    for (let i = 0; i < user.basket; i++) {
+      if (user.basket[i].id !== props.product.id) {
+        continue
+      } else { // item in basket matches this product
+        quantity = user.basket[i].basket
+      }
+    }
+
+  }
 
   // const currentObject = JSON.parse(
   //   localStorage.getItem(`basket/${userId}/${props.item.id}`)
@@ -42,8 +53,7 @@ const QuantitySelector = (props) => {
           )}{" "}
           {!props.selectQuantity && (
             <div>
-              {" "}
-              <p>{quantity}</p> <DownArrow />{" "}
+              <p>{quantity}</p> <DownArrow />
             </div>
           )}{" "}
         </button>
