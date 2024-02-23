@@ -29,9 +29,9 @@ const DeselectItems = () => {
             // Remove user.basket[i] from user.basket
             console.log("user basket before: ")
             console.log(user.basket)
-            setUser(user.basket.splice(i,1))
+            user.basket.splice(i,1)
+            setUser(user)
             sessionStorage.setItem("user", JSON.stringify(user))
-            navigate("/basket")
             console.log("user basket after: ")
             console.log(user.basket)
           }
@@ -39,6 +39,7 @@ const DeselectItems = () => {
         }
        }
     });
+    setCheckedProducts([])
   }
 
   return (

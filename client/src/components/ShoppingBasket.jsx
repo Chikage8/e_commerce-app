@@ -13,11 +13,17 @@ const ShoppingBasket = (props) => {
 
   let basketItems = []
 
-  if (user && user.basket) {
+  console.log(user )
+
+  if (typeof user === "object" && 'basket' in user) {
+    console.log("inside IF")
     for (let i = 0; i < user.basket.length; i++) {
+    console.log("inside FOR")
       basketItems.push(<BasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} />)
     }
   }
+
+  console.log(basketItems) // basket items on the user are present but doesnt get assigned to basketItems array
   
 
   return (
