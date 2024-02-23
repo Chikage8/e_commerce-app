@@ -880,4 +880,6 @@ p {
 
 #deselect-button {
   background-color: #FFFFFF;
+  margin-left: 0;
+  padding-left: 0;
 }
