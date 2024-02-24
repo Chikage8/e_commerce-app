@@ -16,9 +16,6 @@ const BasketItem = (props) => {
     userId = user.id;
   }
 
-  console.log(props.checkedProducts)
-
-  let current_price = props.current_price
   let classes = ["basket-item-right-col-price"];
 
   return (
@@ -56,7 +53,7 @@ const BasketItem = (props) => {
       </div>
 
       <div id="basket-item-right-col">
-        <PriceDisplay price={current_price * props.quantity} classes={classes} />
+        <PriceDisplay price={props.current_price * itemQuantity} classes={classes} />
       </div>
     </div>
   );
