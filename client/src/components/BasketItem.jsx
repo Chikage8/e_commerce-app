@@ -9,6 +9,7 @@ const BasketItem = (props) => {
   //   const [quantity, setQuantity] = useState(1);
   const [selectQuantity, setSelectQuantity] = useState(false);
   const [user, setUser] = useContext(UserContext)
+  const [itemQuantity, setItemQuantity] = useState(1)
 
   let userId;
   if (user) {
@@ -45,7 +46,10 @@ const BasketItem = (props) => {
         <PropValueInfo prop="Special Features" value={props.product.features} />
         <QuantitySelector
           product={props.product}
-          quantity={props.quantity}
+          quantity={props.product.quantity}
+          itemQuantity={itemQuantity}
+          setItemQuantity={setItemQuantity}
+          childSetMyQuantity
           selectQuantity={selectQuantity}
           setSelectQuantity={setSelectQuantity}
         />

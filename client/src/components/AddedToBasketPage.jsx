@@ -101,7 +101,7 @@ const AddedToBasketPage = (props) => {
           ${current_price * quantity}
         </h4>
         <QuantitySelector
-          item={recentlyAddedProduct}
+          product={recentlyAddedProduct}
           selectQuantity={selectQuantity}
           setSelectQuantity={setSelectQuantity}
           quantity={quantity}

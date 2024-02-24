@@ -8,18 +8,28 @@ const SelectQuantityDropDown = (props) => {
     userId = user.id;
   }
 
-  console.log(props.item.id);
+  console.log(props.product.id);
 
   const handleClick = (e) => {
-    const objectAdditions = { quantity: e.target.textContent };
-    const currentObject = JSON.parse(
-      localStorage.getItem(`basket/${userId}/${props.item.id}`)
-    );
-    const newObject = { ...currentObject, ...objectAdditions };
-    localStorage.setItem(
-      `basket/${userId}/${props.item.id}`,
-      JSON.stringify(newObject)
-    );
+    // set item quantity to e.target.textContent
+    console.log("1")
+    if (user && user.basket) {
+      console.log("2")
+      for (let i = 0; i < user.basket.length ; i++) {
+        console.log("3")
+        console.log(props.product.id)
+        console.log(user.basket[i].id)
+        if (props.product.id !== user.basket[i].id) {
+          console.log("4")
+          continue
+        } else { // this user.basket[i] is our product in the basket
+          console.log("setting both quantities")
+          console.log(e.target.textContent)
+          user.basket[i].quantity = e.target.textContent
+          props.setItemQuantity(e.target.textContent)
+        }
+      }
+    }
     props.setSelectQuantity(false);
   };
 

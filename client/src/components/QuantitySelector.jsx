@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import SelectQuantityDropDown from "./SelectQuantityDropDown";
 import { ReactComponent as DownArrow } from "../icons/down-arrow.svg";
 import { ReactComponent as TrashCan } from "../icons/trash-can.svg";
@@ -6,24 +6,33 @@ import { UserContext } from "../App.js"
 
 const QuantitySelector = (props) => {
   const [user, setUser] = useContext(UserContext)
-  let userId;
-  if (user) {
-    userId = user.id;
-  }
+  // let userId;
+  // if (user) {
+    // userId = user[id];
+  // }
 
   // Get the quantity for the item
-  let quantity;
- 
-  if (user && user.basket) { // check against errors
-    for (let i = 0; i < user.basket; i++) {
-      if (user.basket[i].id !== props.product.id) {
-        continue
-      } else { // item in basket matches this product
-        quantity = user.basket[i].basket
+
+  const [quantity, setQuantity] = useState(1)
+  
+  console.log(user && user.basket)
+  
+  useEffect(() => {
+    console.log("inside useEffect")
+    if (typeof user === 'object' && user.basket) { // check against errors
+      for (let i = 0; i < user.basket.length; i++) {
+        if (user.basket[i].id !== props.product.id) {
+          continue
+        } else { // item in basket matches this product
+          console.log("setting quantity")
+          setQuantity(user.basket[i].quantity)
+        }
       }
     }
+  }, [quantity, setQuantity])
+  
 
-  }
+  console.log(quantity)
 
   // const currentObject = JSON.parse(
   //   localStorage.getItem(`basket/${userId}/${props.item.id}`)
@@ -43,19 +52,20 @@ const QuantitySelector = (props) => {
           href=""
           onClick={() => props.setSelectQuantity(!props.selectQuantity)}
         >
-          {" "}
+          
           {props.selectQuantity && (
             <SelectQuantityDropDown
-              item={props.item}
-              setQuantity={props.setQuantity}
+              product={props.product}
+              itemQuantity={props.itemQuantity}
+              setItemQuantity={props.setItemQuantity}
               setSelectQuantity={props.setSelectQuantity}
             />
-          )}{" "}
+          )}
           {!props.selectQuantity && (
             <div>
-              <p>{quantity}</p> <DownArrow />
+              <p>{props.itemQuantity}</p> <DownArrow />
             </div>
-          )}{" "}
+          )}
         </button>
         <div id="trash-can-border">
           <TrashCan />

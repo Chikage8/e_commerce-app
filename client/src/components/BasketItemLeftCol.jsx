@@ -21,7 +21,6 @@ const BasketItemLeftCol = (props) => {
             })
         }
     }
-    console.log(props.product)
 
     return (
         <div id='basket-item-left-col'>
