@@ -26,6 +26,7 @@ const SelectQuantityDropDown = (props) => {
           console.log("setting both quantities")
           console.log(e.target.textContent)
           user.basket[i].quantity = e.target.textContent
+          sessionStorage.setItem("user", JSON.stringify(user))
           props.setItemQuantity(e.target.textContent)
         }
       }

@@ -9,7 +9,27 @@ const BasketItem = (props) => {
   //   const [quantity, setQuantity] = useState(1);
   const [selectQuantity, setSelectQuantity] = useState(false);
   const [user, setUser] = useContext(UserContext)
-  const [itemQuantity, setItemQuantity] = useState(1)
+
+  let quantity = 1
+
+  if (typeof user == 'object' && 'basket' in user) {
+    for (let i = 0; i < user.basket.length; i++) {
+      if (user.basket[i].id !== props.product.id) {
+        continue
+      } else {
+        console.log("!!!Setting quantity")
+        quantity = user.basket[i].quantity
+      }
+    }
+  }
+  console.log("quantity: ", quantity)
+
+  const [itemQuantity, setItemQuantity] = useState(quantity)
+
+  useEffect(()=> {
+    console.log("inside UseEffect")
+    setItemQuantity(quantity)
+  }, [quantity])
 
   let userId;
   if (user) {
@@ -43,7 +63,7 @@ const BasketItem = (props) => {
         <PropValueInfo prop="Special Features" value={props.product.features} />
         <QuantitySelector
           product={props.product}
-          quantity={props.product.quantity}
+          quantity={itemQuantity}
           itemQuantity={itemQuantity}
           setItemQuantity={setItemQuantity}
           childSetMyQuantity
