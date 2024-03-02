@@ -31,9 +31,11 @@ const ShoppingBasketPage = () => {
   if (user && user.basket) {
     for (let i = 0; i < user.basket.length ; i++) {
       totalItemsInBasket += user.basket[i].quantity
-      totalPrice += user.basket[i].current_price
+      totalPrice += user.basket[i].current_price * user.basket[i].quantity
     }
   }
+  console.log("totalItemsInBasket: ", totalItemsInBasket)
+  console.log("totalPrice: ", totalPrice)
 
   let itemText = 'item'
   if (parseInt(totalItemsInBasket) > 1) {
@@ -57,7 +59,7 @@ const ShoppingBasketPage = () => {
           basketProducts={basketProducts} 
           userId={userId}  
           totalPrice={totalPrice}
-          item_count={totalItemsInBasket}
+          totalItemsInBasket={totalItemsInBasket}
           itemText={itemText}
         />
       </CheckedProducts.Provider>
