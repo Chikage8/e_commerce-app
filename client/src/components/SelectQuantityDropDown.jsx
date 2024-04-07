@@ -1,8 +1,14 @@
 import React, { Children, useContext } from "react";
 import { UserContext } from "../App";
+import { TotalItemsInBasket, TotalPrice, QuantityChanged } from "./ShoppingBasketPage.jsx";
 
 const SelectQuantityDropDown = (props) => {
   const [user, setUser] = useContext(UserContext)
+  const [quantityChanged, setQuantityChanged] =  useContext(QuantityChanged)
+
+  const [totalPrice, setTotalPrice] = useContext(TotalPrice)
+  const [totalItemsInBasket, setTotalItemsInBasket] = useContext(TotalItemsInBasket)
+
   let userId;
   if (user) {
     userId = user.id;
@@ -25,9 +31,16 @@ const SelectQuantityDropDown = (props) => {
         } else { // this user.basket[i] is our product in the basket
           console.log("setting both quantities")
           console.log(e.target.textContent)
+          const quantityDif = e.target.textContent - user.basket[i].quantity
+          console.log("quantityDif: ", quantityDif)
+          const priceDif = quantityDif * user.basket[i].current_price
+          setTotalItemsInBasket(totalItemsInBasket + quantityDif)
+          setTotalPrice(totalPrice + priceDif)
           user.basket[i].quantity = e.target.textContent
+          setUser(user)
           sessionStorage.setItem("user", JSON.stringify(user))
           props.setItemQuantity(e.target.textContent)
+          setQuantityChanged(!quantityChanged)
         }
       }
     }

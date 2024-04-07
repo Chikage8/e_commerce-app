@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useReducer } from "react";
 
 const PriceDisplay = (props) => {
   let additionalClasses = [];
@@ -11,6 +11,16 @@ const PriceDisplay = (props) => {
   // }
 
   console.log(props.price) // correct here
+  const [, forceUpdate] = useReducer(x => x + 1, 0);
+
+  function handleClick() {
+    forceUpdate();
+  }
+
+
+  useEffect(()=>{
+    handleClick()
+  }, [props.price])
 
   let priceDecimalPart;
   
@@ -26,7 +36,7 @@ const PriceDisplay = (props) => {
       <div className={`left-top-dollar-sign`}>$</div>
       <div id="price-display-int-part">{!isNaN(priceIntegerPart) && priceIntegerPart}</div>
       <div id="price-display-decimal-part" className={`price-decimal-part`}>
-        {!isNaN(priceDecimalPart) && priceDecimalPart}
+        {!isNaN(priceDecimalPart) && priceDecimalPart.slice(0,2)}
       </div>
     </div>
   );

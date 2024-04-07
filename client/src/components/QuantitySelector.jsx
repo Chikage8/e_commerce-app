@@ -3,9 +3,14 @@ import SelectQuantityDropDown from "./SelectQuantityDropDown";
 import { ReactComponent as DownArrow } from "../icons/down-arrow.svg";
 import { ReactComponent as TrashCan } from "../icons/trash-can.svg";
 import { UserContext } from "../App.js"
+import { TotalItemsInBasket, TotalPrice } from "./ShoppingBasketPage.jsx";
 
 const QuantitySelector = (props) => {
   const [user, setUser] = useContext(UserContext)
+
+  // const [totalPrice, setTotalPrice] = useContext(TotalPrice)
+  // const [totalItemsInBasket, setTotalItemsInBasket] = useContext(TotalItemsInBasket)
+
   // let userId;
   // if (user) {
     // userId = user[id];

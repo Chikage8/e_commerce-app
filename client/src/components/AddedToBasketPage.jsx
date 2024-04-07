@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import PriceDisplay from "./PriceDisplay";
 import Header from "./Header";
 import BuyButtons from "./BuyButtons";
@@ -46,19 +46,22 @@ const AddedToBasketPage = (props) => {
 
   let recentlyAddedProduct = productsInBasket[productsInBasket.length - 1];
   let main_image;
-  let current_price;
-  if (
-    recentlyAddedProduct !== null &&
-    recentlyAddedProduct !== "undefined" &&
-    recentlyAddedProduct !== undefined
-  ) {
-    console.log("recentlyAddedProduct: " + recentlyAddedProduct);
-    main_image = recentlyAddedProduct.main_image;
-    current_price = (
-      recentlyAddedProduct.list_price *
-      (1 - recentlyAddedProduct.discount_percentage / 100)
-    ).toFixed(2);
-  }
+  // let current_price;
+  const [current_price, setCurrentPrice] = useState(0)
+  useEffect(()=>{
+    if (
+      recentlyAddedProduct !== null &&
+      recentlyAddedProduct !== "undefined" &&
+      recentlyAddedProduct !== undefined
+    ) {
+      console.log("recentlyAddedProduct: " + recentlyAddedProduct);
+      main_image = recentlyAddedProduct.main_image;
+      setCurrentPrice((
+        recentlyAddedProduct.list_price *
+        (1 - recentlyAddedProduct.discount_percentage / 100)
+      ).toFixed(2));
+    }
+  },[])
 
   const [selectQuantity, setSelectQuantity] = useState(false);
   const [quantity, setQuantity] = useState(1);
