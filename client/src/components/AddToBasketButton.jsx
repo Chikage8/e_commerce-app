@@ -34,7 +34,10 @@ const AddToBasketButton = (props) => {
             if(user.basket[i].id == thisItemId) {
               // Item was already in the basket, so just increase the quantity by 1
               newProd = false
-              user.basket[i].quantity+=1
+              console.log("Increasing Item Quantity")
+              console.log(typeof user.basket[i].quantity )
+              user.basket[i].quantity = parseInt(user.basket[i].quantity) + 1
+              // user.basket[i].quantity+=1
               sessionStorage.setItem("user", JSON.stringify(user))
               setUser(user)
               break
