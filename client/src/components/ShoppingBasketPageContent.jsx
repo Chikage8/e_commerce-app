@@ -2,14 +2,20 @@ import React, { useState, useEffect } from "react";
 import ShoppingBasket from "./ShoppingBasket";
 import PriceDisplay from "./PriceDisplay";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ShoppingBasketPageContent = (props) => {
 
+  const navigate = useNavigate();
 
   let classes = []
   useEffect(()=>{
     
   }, [ props.totalItemsInBasket, props.totalPrice] )
+
+  function handleClick() {
+    navigate('/buy')
+  }
 
   return (
     <div id="basket-content-container">
@@ -24,7 +30,7 @@ const ShoppingBasketPageContent = (props) => {
       <div id="basket-content-right-col">
         <p>Subtotal({parseInt(props.totalItemsInBasket) + " "}  {props.itemText} ) </p>
         <PriceDisplay totalItemsInBasket={props.totalItemsInBasket} setTotalItemsInBasket={props.setTotalItemsInBasket} price={props.totalPrice} setPrice={props.setTotalPrice} classes={classes} />
-        <button className="checkout-button">Proceed to checkout</button>
+        <button className="checkout-button" onClick={handleClick}>Proceed to checkout</button>
       </div>
     </div>
   );

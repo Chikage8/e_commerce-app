@@ -7,6 +7,7 @@ import RegisterPage from "./components/RegisterPage.jsx";
 import ShoppingBasketPage from "./components/ShoppingBasketPage.jsx";
 import ProductPage from "./components/ProductPage.jsx";
 import AddedToBasketPage from "./components/AddedToBasketPage.jsx";
+import BuyPage from "./components/BuyPage.jsx";
 
 export const UserContext = React.createContext({});
 
@@ -78,6 +79,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/basket" element={<ShoppingBasketPage />} />
             <Route path="/added" element={<AddedToBasketPage />} />
+            <Route path="/buy" element={<BuyPage />} />
             {productRoutes}
             {/* <Route path="/mouse" element={<ProductPage />} /> */}
           </Routes>
