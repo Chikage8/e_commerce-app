@@ -51,73 +51,74 @@ app.get("/", async (req, res) => {
   }
 });
 
-// app.get("/mouse/:id", async (req, res) => {
-//   try {
-//     const id = req.params.id;
-//     const result = await pool.query(
-//       "SELECT * FROM mouse_features WHERE mouse_product_id=$1",
-//       [id]
-//     );
-//     items = result.rows;
-//     console.log(items);
-//     res.send(items);
-//   } catch (error) {
-//     console.error(
-//       "error occurred while trying to fill in items list",
-//       error.stack
-//     );
-//   }
-// });
+app.get("/mouse/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await pool.query(
+      "SELECT * FROM mouse_features WHERE mouse_product_id=$1",
+      [id]
+    );
+    items = result.rows;
+    console.log(items);
+    res.send(items);
+  } catch (error) {
+    console.error(
+      "error occurred while trying to fill in items list",
+      error.stack
+    );
+  }
+});
 
-// app.post("/signin", async (req, res) => {
-//   try {
-//     let email = req.body.email.email;
-//     let password = req.body.password.password;
+app.post("/signin", async (req, res) => {
+  try {
+    let email = req.body.email.email;
+    let password = req.body.password.password;
 
-//     console.log(email);
+    console.log(email);
 
-//     const result = await pool.query(
-//       "SELECT * FROM users WHERE email = $1 AND password = $2",
-//       [email, password]
-//     );
-//     if (result.rows.length != 0) {
-//       console.log(result.rows);
-//       res.send({ user: result.rows[0] });
-//     } else {
-//       console.log("sending response");
-//       res.send("You are not registered to our website");
-//     }
-//   } catch (error) {
-//     console.error(
-//       "error occurred while trying to fill in items list",
-//       error.stack
-//     );
-//   }
-// });
+    const result = await pool.query(
+      "SELECT * FROM users WHERE email = $1 AND password = $2",
+      [email, password]
+    );
+    if (result.rows.length != 0) {
+      console.log(result.rows);
+      res.send({ user: result.rows[0] });
+    } else {
+      console.log("sending response");
+      res.send("You are not registered to our website");
+    }
+  } catch (error) {
+    console.error(
+      "error occurred while trying to fill in items list",
+      error.stack
+    );
+  }
+});
 
-// app.post("/register", async (req, res) => {
-//   try {
-//     let name = req.body.name.name;
-//     let email = req.body.email.email;
-//     let password = req.body.password.password;
-//     // await pool.query("DELETE FROM items WHERE id = $1", [itemToDelete]);
-//     console.log(email, password, name);
-//     await pool.query(
-//       "INSERT INTO users (email, password, name) VALUES ($1, $2, $3);",
-//       [email, password, name]
-//     );
-//     const result = await pool.query(
-//       "SELECT * FROM users WHERE email = $1 AND password = $2",
-//       [email, password]
-//     );
-//     res.send({ user: result.rows[0] });
-//   } catch (error) {
-//     console.error(
-//       "error occurred while trying to register the user",
-//       error.stack
-//     );
-//   }
-// });
+app.post("/register", async (req, res) => {
+  try {
+    let name = req.body.name.name;
+    let email = req.body.email.email;
+    let password = req.body.password.password;
+    console.log("name: " + name + "\n" + "email: " + email + "\n");
+    // await pool.query("DELETE FROM items WHERE id = $1", [itemToDelete]);
+    console.log(email, password, name);
+    await pool.query(
+      "INSERT INTO users (email, password, name) VALUES (?, ?, ?);",
+      [email, password, name]
+    );
+    const result = await pool.query(
+      "SELECT * FROM users WHERE email = ? AND password = ?",
+      [email, password]
+    );
+    res.send({ user: result.rows[0] });
+  } catch (error) {
+    console.error(
+      "error occurred while trying to register the user",
+      error.stack
+    );
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
