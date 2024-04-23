@@ -1,33 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ReactComponent as Basket } from "../icons/shopping-basket.svg";
+import { UserContext } from "../App";
 
-const ShoppingBasketIcon = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  let userId;
-  if (user) {
-    userId = user.user.id;
-  }
-  let userBasketLength = 0;
-  for (let i = 0; i < localStorage.length; i++) {
-    if (
-      localStorage.key(i).substring(0, 7) == `basket/` &&
-      localStorage.key(i).split("/")[1] == userId &&
-      localStorage.key(i).split("/").length > 2 &&
-      localStorage.key(i).split("/")[2] !== "undefined"
-    ) {
-      console.log(
-        JSON.parse(
-          localStorage.getItem(
-            `basket/${localStorage.key(i).split("/")[1]}/${
-              localStorage.key(i).split("/")[2]
-            }`
-          )
-        )
-      );
-      userBasketLength++;
+const ShoppingBasketIcon = (props) => {
+
+  const [user, setUser] = useContext(UserContext)
+
+  let totalItemsInBasket = 0
+  // loop the user basket and add quantities for acquiring number of total items in the basket
+  if (user && user.basket) {
+    for (let i = 0; i < user.basket.length ; i++) {
+      totalItemsInBasket += user.basket[i].quantity
     }
   }
-  // console.log(user.user.basket);
+
   return (
     <div id="shoppingbasket-component-container">
       <a href="/basket" className="clickable">
@@ -37,7 +23,7 @@ const ShoppingBasketIcon = () => {
           </div>
           <p> My Basket </p>
           <div id="basketItemCount-container">
-            <div> {userBasketLength} </div>
+            <div> {totalItemsInBasket} </div>
           </div>
         </div>
       </a>

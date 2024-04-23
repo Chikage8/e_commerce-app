@@ -1,46 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import BasketItemLeftCol from "./BasketItemLeftCol";
 import PropValueInfo from "./PropValueInfo";
 import QuantitySelector from "./QuantitySelector";
 import PriceDisplay from "./PriceDisplay";
+import { UserContext } from "../App.js"
 
 const BasketItem = (props) => {
   //   const [quantity, setQuantity] = useState(1);
   const [selectQuantity, setSelectQuantity] = useState(false);
+  const [user, setUser] = useContext(UserContext)
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  let userId;
-  if (user) {
-    userId = user.user.id;
+  let quantity = 1
+
+  if (typeof user == 'object' && 'basket' in user) {
+    for (let i = 0; i < user.basket.length; i++) {
+      if (user.basket[i].id !== props.product.id) {
+        continue
+      } else {
+        console.log("!!!Setting quantity")
+        quantity = user.basket[i].quantity
+      }
+    }
   }
+  console.log("quantity: ", quantity)
 
-  const currentObject = JSON.parse(
-    localStorage.getItem(`basket/${userId}/${props.item.id}`)
-  );
+  const [itemQuantity, setItemQuantity] = useState(quantity)
 
   useEffect(()=> {
-    props.childSetQuantity(currentObject.quantity)
-  },[])
-  // props.quantity = currentObject.quantity;
+    console.log("inside UseEffect")
+    setItemQuantity(quantity)
+  }, [quantity])
 
-  let current_price = (
-    props.item.list_price *
-    (1 - props.item.discount_percentage / 100)
-  ).toFixed(2);
+  let userId;
+  if (user) {
+    userId = user.id;
+  }
+
   let classes = ["basket-item-right-col-price"];
 
   return (
     <div id="basket-item-content">
       <div id="basket-item-left-col-container">
         <BasketItemLeftCol
-          key={props.item.id}
-          item={props.item}
-          checkedProducts={props.checkedProducts}
+          key={props.product.id}
+          product={props.product}
+          // checkedProducts={props.checkedProducts}
         />
       </div>
 
       <div id="basket-item-center-col">
-        <p id="product-detailed-title"> {props.item.detailed_title} </p>
+        <p id="product-detailed-title"> {props.product.detailed_title} </p>
         <div id="climate-friendly-badge-wrapper">
           <img
             id="climate-friendly-badge"
@@ -49,19 +58,22 @@ const BasketItem = (props) => {
           />
           <p id="climate-friendly-text">Climate Pledge Friendly</p>
         </div>
-        <PropValueInfo prop="Brand" value={props.item.brand} />
-        <PropValueInfo prop="Color" value={props.item.color} />
-        <PropValueInfo prop="Special Features" value={props.item.features} />
+        <PropValueInfo prop="Brand" value={props.product.product_brand} />
+        <PropValueInfo prop="Color" value={props.product.color} />
+        <PropValueInfo prop="Special Features" value={props.product.features} />
         <QuantitySelector
-          item={props.item}
-          quantity={props.quantity}
+          product={props.product}
+          quantity={itemQuantity}
+          itemQuantity={itemQuantity}
+          setItemQuantity={setItemQuantity}
+          childSetMyQuantity
           selectQuantity={selectQuantity}
           setSelectQuantity={setSelectQuantity}
         />
       </div>
 
       <div id="basket-item-right-col">
-        <PriceDisplay price={current_price * props.quantity} classes={classes} />
+        <PriceDisplay price={props.current_price * itemQuantity} classes={classes} />
       </div>
     </div>
   );

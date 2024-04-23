@@ -1,23 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import DeselectItems from "./DeselectItems";
 import PropValueInfo from "./PropValueInfo";
 import QuantitySelector from "./QuantitySelector";
 import BasketItem from "./BasketItem";
+import { UserContext } from "../App";
 
 const ShoppingBasket = (props) => {
-  let basketItems = [];
 
-  props.basketProducts.forEach((product) => {
-    basketItems.push(
-      <BasketItem
-        key={product.id}
-        item={product}
-        checkedProducts={props.checkedProducts}
-        quantity={props.quantity}
-        childSetQuantity={props.childSetQuantity}
-      />
-    );
-  });
+  const [user, setUser] = useContext(UserContext)
+
+  const products = localStorage.getItem("products")
+
+  let basketItems = []
+
+  console.log(user )
+
+  if (typeof user === "object" && 'basket' in user) {
+    console.log("inside IF")
+    for (let i = 0; i < user.basket.length; i++) {
+    console.log("inside FOR")
+      basketItems.push(<BasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
+    }
+  }
+
+  console.log(basketItems) // basket items on the user are present but doesnt get assigned to basketItems array
+  
 
   return (
     <div id="shopping-basket-container">

@@ -1,24 +1,49 @@
-import React, { Children } from "react";
+import React, { Children, useContext } from "react";
+import { UserContext } from "../App";
+import { TotalItemsInBasket, TotalPrice, QuantityChanged } from "./ShoppingBasketPage.jsx";
 
 const SelectQuantityDropDown = (props) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useContext(UserContext)
+  const [quantityChanged, setQuantityChanged] =  useContext(QuantityChanged)
+
+  const [totalPrice, setTotalPrice] = useContext(TotalPrice)
+  const [totalItemsInBasket, setTotalItemsInBasket] = useContext(TotalItemsInBasket)
+
   let userId;
   if (user) {
-    userId = user.user.id;
+    userId = user.id;
   }
 
-  console.log(props.item.id);
+  console.log(props.product.id);
 
   const handleClick = (e) => {
-    const objectAdditions = { quantity: e.target.textContent };
-    const currentObject = JSON.parse(
-      localStorage.getItem(`basket/${userId}/${props.item.id}`)
-    );
-    const newObject = { ...currentObject, ...objectAdditions };
-    localStorage.setItem(
-      `basket/${userId}/${props.item.id}`,
-      JSON.stringify(newObject)
-    );
+    // set item quantity to e.target.textContent
+    console.log("1")
+    if (user && user.basket) {
+      console.log("2")
+      for (let i = 0; i < user.basket.length ; i++) {
+        console.log("3")
+        console.log(props.product.id)
+        console.log(user.basket[i].id)
+        if (props.product.id !== user.basket[i].id) {
+          console.log("4")
+          continue
+        } else { // this user.basket[i] is our product in the basket
+          console.log("setting both quantities")
+          console.log(e.target.textContent)
+          const quantityDif = e.target.textContent - user.basket[i].quantity
+          console.log("quantityDif: ", quantityDif)
+          const priceDif = quantityDif * user.basket[i].current_price
+          setTotalItemsInBasket(totalItemsInBasket + quantityDif)
+          setTotalPrice(totalPrice + priceDif)
+          user.basket[i].quantity = e.target.textContent
+          setUser(user)
+          sessionStorage.setItem("user", JSON.stringify(user))
+          props.setItemQuantity(e.target.textContent)
+          setQuantityChanged(!quantityChanged)
+        }
+      }
+    }
     props.setSelectQuantity(false);
   };
 

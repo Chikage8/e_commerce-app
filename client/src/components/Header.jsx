@@ -39,7 +39,7 @@ function Header(props, {category, setCategoryApp}) {
             </NavMenuItem>
             <SearchBar/>
             <SignInMenuItem />
-            <ShoppingBasketIcon />
+            <ShoppingBasketIcon quantity={props.quantity} />
             <RenderLeftArrow addedPage={props.addedPage} />
         </Navbar>
     );

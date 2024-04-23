@@ -1,93 +1,88 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import Header from "./Header.jsx";
 import ShoppingBasketPageContent from "./ShoppingBasketPageContent.jsx";
+import BasketItem from "./BasketItem.jsx";
+import { UserContext } from "../App.js";
+
+export const CheckedProducts = React.createContext({});
+export const QuantityChanged = React.createContext(false);
+export const TotalItemsInBasket = React.createContext(0);
+export const TotalPrice = React.createContext(0);
+
 
 const ShoppingBasketPage = () => {
 
+  const [checkedProducts, setCheckedProducts] = useState([])
+  const [quantityChanged, setQuantityChanged] = useState(false)
+
   const [quantity, setQuantity] = useState()
+
   const childSetQuantity = (value) => {
     setQuantity(value)
   }
 
-  let checkedProducts = [];
+  console.log(checkedProducts)
 
   let products = JSON.parse(localStorage.getItem("products"));
   let basketProducts = []; // basket product info will be stored here
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useContext(UserContext)
   let userId;
   if (user) {
-    userId = user.user.id;
+    userId = user.id;
   }
 
-  console.log("setting user basket as empty array");
-  let userBasket = [];
-  let basketItemIds = [];
-  // Storing basket Items for the user on the userBasket array as objects with format: product_id: {product info key value pairs}
-  for (let i = 0; i < localStorage.length; i++) {
-    if (
-      localStorage.key(i).substring(0, 7) == `basket/` &&
-      localStorage.key(i).split("/")[1] == userId &&
-      localStorage.key(i).split("/").length > 2 &&
-      localStorage.key(i).split("/")[2] !== "undefined"
-    ) {
-      let basketItemId = localStorage.key(i).split("/")[2];
-      console.log(basketItemId);
-      let basketItemContentObject = JSON.parse(
-        localStorage.getItem(
-          `basket/${localStorage.key(i).split("/")[1]}/${
-            localStorage.key(i).split("/")[2]
-          }`
-        )
-      );
-      userBasket.push({ [basketItemId]: basketItemContentObject });
-      basketItemIds.push(basketItemId);
-    }
-  }
+  // let totalItemsInBasket = 0
+  // let totalPrice = 0
 
-  // get the product information for the items in basket
-  basketItemIds.forEach((id) => {
-    products.forEach((product) => {
-      if (id == product.id) {
-        basketProducts.push(product);
+  const [totalItemsInBasket, setTotalItemsInBasket] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0)
+
+  useEffect(()=> {
+    if (user && user.basket) {
+      for (let i = 0; i < user.basket.length ; i++) {
+        setTotalItemsInBasket(totalItemsInBasket + user.basket[i].quantity)
+        setTotalPrice(totalPrice + user.basket[i].current_price * user.basket[i].quantity)
       }
-    });
-  });
+    }
+  }, [user])
+  console.log("totalItemsInBasket: ", totalItemsInBasket)
+  console.log("totalPrice: ", totalPrice)
 
-  let totalPrice = 0;
-  const [itemCount, setItemCount ] = useState(0);
-  let item_count 
-  for (let i = 0; i < userBasket.length; i++) {
-    let itemId = basketItemIds[i];
-    console.log(userBasket[i][itemId].quantity);
-    let objectQuantity = userBasket[i][itemId].quantity;
-    let objectUnitPrice = userBasket[i][itemId].current_price;
-    let objectTotalPrice = objectQuantity * objectUnitPrice;
-    item_count = itemCount
-    item_count += objectQuantity;
-    totalPrice += objectTotalPrice;
-  }
-  
   let itemText = 'item'
-  if (parseInt(item_count) > 1) {
+  if (parseInt(totalItemsInBasket) > 1) {
     itemText += 's'
+  }
+  console.log(user)
+
+  if (user && 'basket' in user ) {
+    console.log("USER BASKET: ")
+    console.log(user.basket)
   }
 
   return (
     <div>
-      <Header />
-      <ShoppingBasketPageContent 
-        quantity={quantity}
-        childSetQuantity={childSetQuantity} 
-        checkedProducts={checkedProducts}
-        basketProducts={basketProducts} 
-        userId={userId}  
-        userBasket={userBasket}
-        basketItemIds={basketItemIds}
-        totalPrice={totalPrice}
-        item_count={item_count}
-        itemText={itemText}
-      />
+      <TotalPrice.Provider value={[totalPrice, setTotalPrice]}>
+        <TotalItemsInBasket.Provider value={[totalItemsInBasket, setTotalItemsInBasket]}>
+          <QuantityChanged.Provider value={[quantityChanged, setQuantityChanged]}>
+            <CheckedProducts.Provider value={[checkedProducts, setCheckedProducts]}>
+              <Header quantity={quantity} />
+              <ShoppingBasketPageContent 
+                quantity={quantity}
+                childSetQuantity={childSetQuantity} 
+                checkedProducts={checkedProducts}
+                basketProducts={basketProducts} 
+                userId={userId}  
+                totalPrice={totalPrice}
+                setTotalPrice={setTotalPrice}
+                totalItemsInBasket={totalItemsInBasket}
+                setTotalItemsInBasket = {setTotalItemsInBasket}
+                itemText={itemText}
+              />
+            </CheckedProducts.Provider>
+          </QuantityChanged.Provider>
+        </TotalItemsInBasket.Provider>
+      </TotalPrice.Provider>
     </div>
   );
 };
