@@ -42,6 +42,7 @@ app.get("/", async (req, res) => {
     console.log("trying pool.query()");
     const result = await pool.query("SELECT * FROM products ORDER BY id ASC");
     items = result[0];
+    console.log("items: " + items);
     res.send(items);
   } catch (error) {
     console.error(
@@ -55,11 +56,11 @@ app.get("/mouse/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const result = await pool.query(
-      "SELECT * FROM mouse_features WHERE mouse_product_id=$1",
+      "SELECT * FROM mouse_features WHERE mouse_product_id=?",
       [id]
     );
     items = result.rows;
-    console.log(items);
+    console.log("items: " + items);
     res.send(items);
   } catch (error) {
     console.error(
@@ -74,15 +75,17 @@ app.post("/signin", async (req, res) => {
     let email = req.body.email.email;
     let password = req.body.password.password;
 
-    console.log(email);
+    console.log("email: " + email);
+    console.log("password: " + password);
 
     const result = await pool.query(
-      "SELECT * FROM users WHERE email = $1 AND password = $2",
+      "SELECT * FROM users WHERE email = ? AND password = ?",
       [email, password]
     );
-    if (result.rows.length != 0) {
-      console.log(result.rows);
-      res.send({ user: result.rows[0] });
+    const user = result[0];
+    console.log("user: ", user);
+    if (user.length != 0) {
+      res.send({ user: result[0] });
     } else {
       console.log("sending response");
       res.send("You are not registered to our website");
@@ -101,7 +104,7 @@ app.post("/register", async (req, res) => {
     let email = req.body.email.email;
     let password = req.body.password.password;
     console.log("name: " + name + "\n" + "email: " + email + "\n");
-    // await pool.query("DELETE FROM items WHERE id = $1", [itemToDelete]);
+    // await pool.query("DELETE FROM items WHERE id = ?", [itemToDelete]);
     console.log(email, password, name);
     await pool.query(
       "INSERT INTO users (email, password, name) VALUES (?, ?, ?);",
