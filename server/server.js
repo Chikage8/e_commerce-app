@@ -82,9 +82,8 @@ app.post("/signin", async (req, res) => {
       "SELECT * FROM users WHERE email = ? AND password = ?",
       [email, password]
     );
-    const user = result[0];
-    console.log("user: ", user);
-    if (user.length != 0) {
+    if (result[0].length != 0) {
+      console.log("/signin result[0]: ", result[0]);
       res.send({ user: result[0] });
     } else {
       console.log("sending response");
@@ -114,7 +113,8 @@ app.post("/register", async (req, res) => {
       "SELECT * FROM users WHERE email = ? AND password = ?",
       [email, password]
     );
-    res.send({ user: result.rows[0] });
+    console.log("/register result[0]: ", result[0]);
+    res.send({ user: result[0] });
   } catch (error) {
     console.error(
       "error occurred while trying to register the user",

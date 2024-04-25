@@ -41,8 +41,6 @@ function SignInPage(props) {
           password: { password },
         })
         .then((response) => {
-          console.log("response: " + response);
-          console.log("response.user: " + response.user);
           console.log("response.data: " + response.data.user[0].name);
           typeof response.data == "object"
             ? setUser(response.data.user[0])                                      // localStorage.setItem("user", JSON.stringify(response.data))
@@ -53,7 +51,7 @@ function SignInPage(props) {
             ? redirect("/")
             : setMailWarning(null);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log("error: ", error));
     } else if (passwordPattern.test(password)) {
       // only mail is wrong
       setWarning(null);

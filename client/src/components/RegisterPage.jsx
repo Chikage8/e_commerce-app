@@ -47,17 +47,33 @@ function RegisterPage(props) {
       setNameWarning(null);
       setMailWarning(null);
       setPasswordWarning(null);
-      axios
-        .post("http://localhost:5000/register", {
+      // axios
+      //   .post("http://localhost:5000/register", {
+      //     email: { email },
+      //     password: { password },
+      //     name: { name },
+      //   })
+      //   .then((response) => {
+      //     console.log("setting user");
+      //     setUser([response.data.user[0]])  
+      //     console.log("redirecting...");                                                                // localStorage.setItem("user", response.data);;
+      //     redirect("/");
+      //   })
+      // .catch((error) => console.log(error));
+      axios.post("http://localhost:5000/register", {
           email: { email },
           password: { password },
           name: { name },
         })
         .then((response) => {
-          setUser(response.data.user)                                                                  // localStorage.setItem("user", response.data);
-          redirect("/");
+          if (typeof response.data == "object")  {
+            console.log("setting user");
+            setUser(response.data.user[0]);  
+            console.log("redirecting...");                                                                // localStorage.setItem("user", response.data);;
+            redirect("/");
+          }
         })
-        .catch((error) => console.log(error));
+      .catch((error) => console.log(error));
     } else {
       setNameWarning(null);
       setMailWarning(null);
@@ -84,7 +100,7 @@ function RegisterPage(props) {
       <div className="outer-box">
         <div className="inner-box padding-extra-large">
           <h1 id="register-header">Register</h1>
-          <label htmlFor="register-in-email-input">Name: </label>
+          <label htmlFor="register-name-input">Name: </label>
           <input
             id="register-name-input"
             className="user-management-input"
@@ -92,6 +108,7 @@ function RegisterPage(props) {
             type="text"
             required
             onChange={handleNameChange}
+            // autoComplete="name-surname"
           />
           {nameWarning ? <h5> {nameWarning} </h5> : null}
           <label htmlFor="register-email-input">E-mail: </label>
@@ -102,6 +119,7 @@ function RegisterPage(props) {
             type="email"
             required
             onChange={handleEmailChange}
+            // autoComplete="email"
           />
           {mailWarning ? <h5> {mailWarning} </h5> : null}
           <label htmlFor="register-password-input">Password: </label>
