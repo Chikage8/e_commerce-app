@@ -15,22 +15,25 @@ const AddedToBasketPage = (props) => {
 
   const [user, setUser] = useContext(UserContext);
 
+  console.log("AddedToBasketPage -> user.basket: ", user.basket);
+
   // Store the Ids of the basket items in an array
-  for (let i = 0; i < localStorage.length; i++) {
-    console.log("a");
-    if (
-      localStorage.key(i).substring(0, 7) == `basket/` &&
-      localStorage.key(i).split("/")[1] == user.id &&
-      localStorage.key(i).split("/").length > 2 &&
-      localStorage.key(i).split("/")[2] !== "undefined"
-    ) {
-      console.log("aa");
-      console.log(parseInt(localStorage.key(i).split("/")[2]));
-      productsInBasketIds.push(parseInt(localStorage.key(i).split("/")[2]));
-    }
-  }
+  // for (let i = 0; i < localStorage.length; i++) {
+  //   console.log("a");
+  //   if (
+  //     localStorage.key(i).substring(0, 7) == `basket/` &&
+  //     localStorage.key(i).split("/")[1] == user.id &&
+  //     localStorage.key(i).split("/").length > 2 &&
+  //     localStorage.key(i).split("/")[2] !== "undefined"
+  //   ) {
+  //     console.log("aa");
+  //     console.log(parseInt(localStorage.key(i).split("/")[2]));
+  //     productsInBasketIds.push(parseInt(localStorage.key(i).split("/")[2]));
+  //   }
+  // }
 
   let products = JSON.parse(localStorage.getItem("products"));
+  console.log(products);
   // Store the actual products corresponding to Ids in an array
   for (let i = 0; i < productsInBasketIds.length; i++) {
     productsInBasket.push(
@@ -44,7 +47,8 @@ const AddedToBasketPage = (props) => {
   //     user.user.basket.push(prod);
   //   });
 
-  let recentlyAddedProduct = productsInBasket[productsInBasket.length - 1];
+  let recentlyAddedProduct = user.basket[user.basket.length - 1];
+  console.log(recentlyAddedProduct);
   let main_image;
   // let current_price;
   const [current_price, setCurrentPrice] = useState(0)
