@@ -21,6 +21,7 @@ const BasketItemLeftCol = (props) => {
             checkedProductsCopy.filter((product) => {
                 return product !== props.product.id
             })
+            setCheckedProducts(checkedProductsCopy)
         }
     }
 
