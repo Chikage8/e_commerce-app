@@ -56,6 +56,8 @@ const QuantitySelector = (props) => {
             if (user.basket[i].id === checkedProductsCopy[j]) {
               console.log("last if");
               user.basket.splice(i, 1);
+              setUser(user);
+              sessionStorage.setItem("user", JSON.stringify(user));
             }
           } 
         }
