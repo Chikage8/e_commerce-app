@@ -4,7 +4,7 @@ import ShoppingBasketPageContent from "./ShoppingBasketPageContent.jsx";
 import BasketItem from "./BasketItem.jsx";
 import { UserContext } from "../App.js";
 
-export const CheckedProducts = React.createContext({});
+export const CheckedProducts = React.createContext([]);
 export const QuantityChanged = React.createContext(false);
 export const TotalItemsInBasket = React.createContext(0);
 export const TotalPrice = React.createContext(0);

@@ -15,6 +15,8 @@ const BasketItemLeftCol = (props) => {
         console.log(checkedProductsCopy) // SORUN BURDA
         if (e.target.checked) {
             checkedProductsCopy.push(props.product.id)
+            console.log("checkedProductsCopy: ",  checkedProductsCopy[0], "\n");
+            setCheckedProducts(checkedProductsCopy)
         } else {
             checkedProductsCopy.filter((product) => {
                 return product !== props.product.id
