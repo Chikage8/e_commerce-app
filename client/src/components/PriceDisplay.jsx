@@ -10,8 +10,8 @@ const PriceDisplay = (props) => {
   //   }
   // }
 
-  console.log(props.price) // correct here
-  const [, forceUpdate] = useReducer(x => x + 1, 0);
+  console.log(props.price)
+  const [, forceUpdate] = useReducer(x => x + 1, 0); // useReducer is just used to force update
 
   function handleClick() {
     forceUpdate();

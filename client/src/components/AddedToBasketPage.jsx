@@ -48,7 +48,6 @@ const AddedToBasketPage = (props) => {
   //   });
 
   let recentlyAddedProduct = user.basket[user.basket.length - 1];
-  console.log(recentlyAddedProduct);
   let main_image;
   // let current_price;
   const [current_price, setCurrentPrice] = useState(0)
@@ -58,12 +57,23 @@ const AddedToBasketPage = (props) => {
       recentlyAddedProduct !== "undefined" &&
       recentlyAddedProduct !== undefined
     ) {
-      console.log("recentlyAddedProduct: " + recentlyAddedProduct);
+      console.log("recentlyAddedProduct: ", recentlyAddedProduct);
+      // adjusting added to basket page pricing
       main_image = recentlyAddedProduct.main_image;
       setCurrentPrice((
         recentlyAddedProduct.list_price *
         (1 - recentlyAddedProduct.discount_percentage / 100)
       ).toFixed(2));
+
+      // altering user basket
+      // for ( let i = 0; i < user.basket.length; i++ ) {
+      //   if(user.basket[i].id === recentlyAddedProduct.id) {
+      //     user.basket[i].quantity = parseInt(user.basket[i].quantity) + 1
+      //     sessionStorage.setItem("user", JSON.stringify(user))
+      //     setUser(user)
+      //     break
+      //   }
+      // }
     }
   },[])
 

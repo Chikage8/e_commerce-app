@@ -14,6 +14,8 @@ const ShoppingBasketPage = () => {
 
   const [checkedProducts, setCheckedProducts] = useState([])
   const [quantityChanged, setQuantityChanged] = useState(false)
+  const [totalItemsInBasket, setTotalItemsInBasket] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0)
 
   const [quantity, setQuantity] = useState()
 
@@ -35,14 +37,13 @@ const ShoppingBasketPage = () => {
   // let totalItemsInBasket = 0
   // let totalPrice = 0
 
-  const [totalItemsInBasket, setTotalItemsInBasket] = useState(0)
-  const [totalPrice, setTotalPrice] = useState(0)
-
   useEffect(()=> {
+    console.log("Inside Subtotal useEffect");
     if (user && user.basket) {
       for (let i = 0; i < user.basket.length ; i++) {
-        setTotalItemsInBasket(totalItemsInBasket + user.basket[i].quantity)
-        setTotalPrice(totalPrice + user.basket[i].current_price * user.basket[i].quantity)
+        console.log("Subtotal is being adjusted by adding the item with id: ", user.basket[i].id, " quantity: ", user.basket[i].quantity, " price: ", user.basket[i].current_price, "\n");
+        setTotalItemsInBasket(prevTotalItems => prevTotalItems + user.basket[i].quantity)
+        setTotalPrice(prevTotalPrice => prevTotalPrice + user.basket[i].current_price * user.basket[i].quantity)
       }
     }
   }, [user])

@@ -34,8 +34,10 @@ const SelectQuantityDropDown = (props) => {
           const quantityDif = e.target.textContent - user.basket[i].quantity
           console.log("quantityDif: ", quantityDif)
           const priceDif = quantityDif * user.basket[i].current_price
-          setTotalItemsInBasket(totalItemsInBasket + quantityDif)
-          setTotalPrice(totalPrice + priceDif)
+          setTotalItemsInBasket(prevTotalItems => prevTotalItems + quantityDif)
+          // setTotalItemsInBasket(totalItemsInBasket + quantityDif)
+          // setTotalPrice(totalPrice + priceDif)
+          setTotalPrice(prevTotalPrice => prevTotalPrice + priceDif)
           user.basket[i].quantity = e.target.textContent
           setUser(user)
           sessionStorage.setItem("user", JSON.stringify(user))
