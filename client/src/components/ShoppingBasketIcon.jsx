@@ -10,7 +10,7 @@ const ShoppingBasketIcon = (props) => {
   // loop the user basket and add quantities for acquiring number of total items in the basket
   if (user && user.basket) {
     for (let i = 0; i < user.basket.length ; i++) {
-      totalItemsInBasket += user.basket[i].quantity
+      totalItemsInBasket += parseInt(user.basket[i].quantity)
     }
   }
 

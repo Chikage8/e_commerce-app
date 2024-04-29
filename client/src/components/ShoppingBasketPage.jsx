@@ -38,8 +38,8 @@ const ShoppingBasketPage = () => {
     if (user && user.basket) {
       for (let i = 0; i < user.basket.length ; i++) {
         console.log("Subtotal is being adjusted by adding the item with id: ", user.basket[i].id, " quantity: ", user.basket[i].quantity, " price: ", user.basket[i].current_price, "\n");
-        setTotalItemsInBasket(prevTotalItems => prevTotalItems + user.basket[i].quantity)
-        setTotalPrice(prevTotalPrice => prevTotalPrice + user.basket[i].current_price * user.basket[i].quantity)
+        setTotalItemsInBasket(prevTotalItems => prevTotalItems + parseInt(user.basket[i].quantity))
+        setTotalPrice(prevTotalPrice => prevTotalPrice + parseFloat(user.basket[i].current_price) * parseInt(user.basket[i].quantity))
       }
     }
   }, [user])
