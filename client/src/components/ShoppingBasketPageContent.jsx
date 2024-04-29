@@ -3,8 +3,8 @@ import ShoppingBasket from "./ShoppingBasket";
 import PriceDisplay from "./PriceDisplay";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../App";
-import { TotalItemsInBasket, TotalPrice } from "./ShoppingBasketPage";
+import { UserContext, TotalItemsInBasket } from "../App";
+// import { TotalItemsInBasket, TotalPrice } from "./ShoppingBasketPage";
 
 const ShoppingBasketPageContent = (props) => {
 
@@ -12,7 +12,16 @@ const ShoppingBasketPageContent = (props) => {
 
   const [user, setUser] = useContext(UserContext)
 
-  const [localPrice, setLocalPrice] = useState(props.totalPrice);
+  const [totalItemsInBasket, setTotalItemsInBasket] = useContext(TotalItemsInBasket)
+  let totalItemsInBasketCopy = parseInt(totalItemsInBasket);
+  
+  function totalItemsInBasketGetter() {
+    return totalItemsInBasket;
+  }
+
+  function totalItemsInBasketSetter(value) {
+    setTotalItemsInBasket(value);
+  }
 
   let classes = []
 
@@ -20,12 +29,16 @@ const ShoppingBasketPageContent = (props) => {
 
   useEffect(()=>{
     console.log("shopingbasketpagecontent useEffect")
+    if (user && user.basket) {
+      totalItemsInBasketSetter(0);
+      for (let i = 0; i < user.basket.length ; i++) {
+        console.log("################### Subtotal is being adjusted by adding the item with id: ", user.basket[i].id, " quantity: ", user.basket[i].quantity);
+        totalItemsInBasketCopy += parseInt(user.basket[i].quantity);
+        console.log("################### totalItemsInBasketCopy: ", totalItemsInBasketCopy);
+      }
+    }
     forceUpdate();
-  }, [user, user.basket] )
-
-  useEffect(() => {
-    forceUpdate();
-  }, [props.totalPrice, localPrice])
+  }, [user] )
 
   function handleClick() {
     navigate('/buy')
@@ -42,7 +55,7 @@ const ShoppingBasketPageContent = (props) => {
         />
       </div>
       <div id="basket-content-right-col">
-        <p>Subtotal({parseInt(props.totalItemsInBasket) + " "}  {props.itemText} ) </p>
+        <p>Subtotal({parseInt(totalItemsInBasketCopy) + " "}  {props.itemText} ) </p>
         <PriceDisplay totalItemsInBasket={props.totalItemsInBasket} setTotalItemsInBasket={props.setTotalItemsInBasket} price={props.totalPrice} setPrice={props.setTotalPrice} classes={classes} />
         <button className="checkout-button" onClick={handleClick}>Proceed to checkout</button>
       </div>

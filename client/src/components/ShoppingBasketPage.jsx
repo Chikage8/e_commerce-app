@@ -2,20 +2,20 @@ import React, {useState, useEffect, useContext} from "react";
 import Header from "./Header.jsx";
 import ShoppingBasketPageContent from "./ShoppingBasketPageContent.jsx";
 import BasketItem from "./BasketItem.jsx";
-import { UserContext } from "../App.js";
+import { UserContext, TotalItemsInBasket, TotalPrice } from "../App.js";
 
 export const CheckedProducts = React.createContext([]);
 export const QuantityChanged = React.createContext(false);
-export const TotalItemsInBasket = React.createContext(0);
-export const TotalPrice = React.createContext(0);
+
 
 
 const ShoppingBasketPage = () => {
 
   const [checkedProducts, setCheckedProducts] = useState([])
   const [quantityChanged, setQuantityChanged] = useState(false)
-  const [totalItemsInBasket, setTotalItemsInBasket] = useState(0)
-  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalItemsInBasket, setTotalItemsInBasket] = useContext(TotalItemsInBasket)
+  const [totalPrice, setTotalPrice] = useContext(TotalPrice)
+  
   const [quantity, setQuantity] = useState()
   const [user, setUser] = useContext(UserContext)
 
@@ -62,27 +62,23 @@ const ShoppingBasketPage = () => {
 
   return (
     <div>
-      <TotalPrice.Provider value={[totalPrice, setTotalPrice]}>
-        <TotalItemsInBasket.Provider value={[totalItemsInBasket, setTotalItemsInBasket]}>
-          <QuantityChanged.Provider value={[quantityChanged, setQuantityChanged]}>
-            <CheckedProducts.Provider value={[checkedProducts, setCheckedProducts]}>
-              <Header quantity={quantity} />
-              <ShoppingBasketPageContent 
-                quantity={quantity}
-                childSetQuantity={childSetQuantity} 
-                checkedProducts={checkedProducts}
-                basketProducts={basketProducts} 
-                userId={userId}  
-                totalPrice={totalPrice}
-                setTotalPrice={setTotalPrice}
-                totalItemsInBasket={totalItemsInBasket}
-                setTotalItemsInBasket = {setTotalItemsInBasket}
-                itemText={itemText}
-              />
-            </CheckedProducts.Provider>
-          </QuantityChanged.Provider>
-        </TotalItemsInBasket.Provider>
-      </TotalPrice.Provider>
+      <QuantityChanged.Provider value={[quantityChanged, setQuantityChanged]}>
+        <CheckedProducts.Provider value={[checkedProducts, setCheckedProducts]}>
+          <Header quantity={quantity} />
+          <ShoppingBasketPageContent 
+            quantity={quantity}
+            childSetQuantity={childSetQuantity} 
+            checkedProducts={checkedProducts}
+            basketProducts={basketProducts} 
+            userId={userId}  
+            totalPrice={totalPrice}
+            setTotalPrice={setTotalPrice}
+            totalItemsInBasket={totalItemsInBasket}
+            setTotalItemsInBasket = {setTotalItemsInBasket}
+            itemText={itemText}
+          />
+        </CheckedProducts.Provider>
+      </QuantityChanged.Provider>
     </div>
   );
 };

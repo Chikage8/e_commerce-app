@@ -1,6 +1,6 @@
 import React, { Children, useContext } from "react";
-import { UserContext } from "../App";
-import { TotalItemsInBasket, TotalPrice, QuantityChanged } from "./ShoppingBasketPage.jsx";
+import { UserContext, TotalItemsInBasket, TotalPrice } from "../App";
+import { QuantityChanged } from "./ShoppingBasketPage.jsx";
 
 const SelectQuantityDropDown = (props) => {
   const [user, setUser] = useContext(UserContext)

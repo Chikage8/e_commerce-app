@@ -10,8 +10,13 @@ import AddedToBasketPage from "./components/AddedToBasketPage.jsx";
 import BuyPage from "./components/BuyPage.jsx";
 
 export const UserContext = React.createContext({});
+export const TotalItemsInBasket = React.createContext(0);
+export const TotalPrice = React.createContext(0);
 
 function App() {
+
+  const [totalItemsInBasket, setTotalItemsInBasket] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0)
 
   let valueToSetUser
   if (sessionStorage.getItem("user") !== undefined && sessionStorage.getItem("user") !== 'undefined') {
@@ -72,18 +77,22 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={[user, setUser]}>
-        <Router>
-          <Routes>
-            <Route path="/" exact element={<HomePage />} />
-            <Route path="/signin" element={<SignInPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/basket" element={<ShoppingBasketPage />} />
-            <Route path="/added" element={<AddedToBasketPage />} />
-            <Route path="/buy" element={<BuyPage />} />
-            {productRoutes}
-            {/* <Route path="/mouse" element={<ProductPage />} /> */}
-          </Routes>
-        </Router>
+        <TotalPrice.Provider value={[totalPrice, setTotalPrice]}>
+          <TotalItemsInBasket.Provider value={[totalItemsInBasket, setTotalItemsInBasket]}>
+            <Router>
+              <Routes>
+                <Route path="/" exact element={<HomePage />} />
+                <Route path="/signin" element={<SignInPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/basket" element={<ShoppingBasketPage />} />
+                <Route path="/added" element={<AddedToBasketPage />} />
+                <Route path="/buy" element={<BuyPage />} />
+                {productRoutes}
+                {/* <Route path="/mouse" element={<ProductPage />} /> */}
+              </Routes>
+            </Router>
+          </TotalItemsInBasket.Provider>
+        </TotalPrice.Provider>
       </UserContext.Provider>
     </div>
   );
