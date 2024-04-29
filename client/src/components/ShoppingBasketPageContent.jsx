@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import ShoppingBasket from "./ShoppingBasket";
 import PriceDisplay from "./PriceDisplay";
 import { useContext } from "react";
@@ -12,22 +12,20 @@ const ShoppingBasketPageContent = (props) => {
 
   const [user, setUser] = useContext(UserContext)
 
+  const [localPrice, setLocalPrice] = useState(props.totalPrice);
+
   let classes = []
+
+  const [, forceUpdate] = useReducer(x => x + 1, 0); // useReducer is just used to force update
+
   useEffect(()=>{
     console.log("shopingbasketpagecontent useEffect")
-    // if (user && user.basket) {
-    //   // reset values before counting all the basket items
-    //   props.setTotalItemsInBasket(0);
-    //   props.setTotalPrice(0);
-    //   // calculate total number of items in the basket and their total price 
-    //   for (let i = 0; i < user.basket.length ; i++) {
-    //     console.log("Subtotal is being adjusted by adding the item with id: ", user.basket[i].id, " quantity: ", user.basket[i].quantity, " price: ", user.basket[i].current_price, "\n");
-    //     props.setTotalItemsInBasket(props.totalItemsInBasket + user.basket[i].quantity)
-    //     props.setTotalPrice(props.totalPrice + user.basket[i].current_price * user.basket[i].quantity)
-    //     console.log("i: ", i, " totalItemsInBasket: ", props.totalItemsInBasket, " totalPrice: ", props.totalPrice, "\n");
-    //   }
-    // }
+    forceUpdate();
   }, [user, user.basket] )
+
+  useEffect(() => {
+    forceUpdate();
+  }, [props.totalPrice, localPrice])
 
   function handleClick() {
     navigate('/buy')

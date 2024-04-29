@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../App';
 import { CheckedProducts } from './ShoppingBasketPage';
 import { useNavigate } from 'react-router-dom';
+import { TotalItemsInBasket, TotalPrice } from './ShoppingBasketPage';
 
 const DeselectItems = () => {
 
@@ -9,6 +10,25 @@ const DeselectItems = () => {
 
   const [user, setUser] = useContext(UserContext)
   const [checkedProducts, setCheckedProducts] = useContext(CheckedProducts)
+
+  const [totalItemsInBasket, setTotalItemsInBasket] = useContext(TotalItemsInBasket);
+  const [totalPrice, setTotalPrice] = useContext(TotalPrice);
+
+  function totalItemsInBasketGetter() {
+    return totalItemsInBasket;
+  }
+
+  function totalItemsInBasketSetter(value) {
+    setTotalItemsInBasket(value);
+  }
+
+  function totalPriceGetter() {
+    return totalPrice
+  }
+
+  function totalPriceSetter(value) {
+    setTotalPrice(value);
+  }
 
   console.log(checkedProducts)
   console.log(user)
@@ -29,6 +49,17 @@ const DeselectItems = () => {
             // Remove user.basket[i] from user.basket
             console.log("user basket before: ")
             console.log(user.basket)
+
+            let itemCount = totalItemsInBasketGetter();
+            let price = totalPriceGetter();
+
+            totalItemsInBasketSetter(itemCount - user.basket[i].quantity);
+            totalPriceSetter(price - user.basket[i].quantity * user.basket[i].current_price);
+
+            // if (user.basket[i]) {
+            //   setTotalItemsInBasket(value => value - user.basket[i].quantity)
+            //   setTotalPrice(value => value - user.basket[i].quantity * user.basket[i].current_price)
+            // }
             user.basket.splice(i,1)
             setUser(user)
             sessionStorage.setItem("user", JSON.stringify(user))

@@ -16,8 +16,8 @@ const ShoppingBasketPage = () => {
   const [quantityChanged, setQuantityChanged] = useState(false)
   const [totalItemsInBasket, setTotalItemsInBasket] = useState(0)
   const [totalPrice, setTotalPrice] = useState(0)
-
   const [quantity, setQuantity] = useState()
+  const [user, setUser] = useContext(UserContext)
 
   const childSetQuantity = (value) => {
     setQuantity(value)
@@ -28,7 +28,6 @@ const ShoppingBasketPage = () => {
   let products = JSON.parse(localStorage.getItem("products"));
   let basketProducts = []; // basket product info will be stored here
 
-  const [user, setUser] = useContext(UserContext)
   let userId;
   if (user) {
     userId = user.id;
