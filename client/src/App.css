@@ -691,6 +691,11 @@ p {
   width: calc(var(--card-width)*0.3)  ;
 }
 
+#main-picture-container img {
+  margin-top: 1rem;
+  width: 25rem;
+}
+
 .quantity-selector-div {
   display: flex;
   flex-direction: row;

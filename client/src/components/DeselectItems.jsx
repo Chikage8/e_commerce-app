@@ -45,7 +45,7 @@ const DeselectItems = () => {
        if (user && user.basket) {
          console.log(user.basket)
         for (let i = 0; i < user.basket.length; i++) {
-          if (user.basket[i].id = checkedProduct) {
+          if (user.basket[i].id == checkedProduct) {
             // Remove user.basket[i] from user.basket
             console.log("user basket before: ")
             console.log(user.basket)
