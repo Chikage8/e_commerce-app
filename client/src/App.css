@@ -665,6 +665,12 @@ p {
   margin-bottom: calc(var(--padding)*2);
 }
 
+#vertical-basket-item-right-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #go-to-basket-button-container {
   background-color: white;
   color: black;

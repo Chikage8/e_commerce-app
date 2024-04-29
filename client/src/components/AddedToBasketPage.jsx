@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import PriceDisplay from "./PriceDisplay";
 import Header from "./Header";
+import Content from "./Content.jsx";
 import BuyButtons from "./BuyButtons";
 import GoToBasketButton from "./GoToBasketButton";
 import { ReactComponent as DownArrow } from "../icons/down-arrow.svg";
@@ -19,10 +20,16 @@ const AddedToBasketPage = (props) => {
   const [totalItemsInBasket, setTotalItemsInBasket] = useContext(TotalItemsInBasket);
   const [totalPrice, setTotalPrice] = useContext(TotalPrice);
 
-  let recentlyAddedProduct = user.basket[user.basket.length - 1];
-  console.log(recentlyAddedProduct.current_price)
-  const [itemTotalPrice, setItemTotalPrice] = useState(parseInt(recentlyAddedProduct.current_price * recentlyAddedProduct.quantity))
-  const itemTotalPriceCopy = itemTotalPrice;
+  // const [itemTotalPrice, setItemTotalPrice] = useState(parseInt(recentlyAddedProduct.current_price * recentlyAddedProduct.quantity))
+
+  const [recentlyAddedProduct, setRecentlyAddedProduct] = useState(null)
+
+  if (typeof user === "object" && 'basket' in user) {
+    let recentlyAddedProduct = user.basket[user.basket.length - 1];
+    // console.log(recentlyAddedProduct.current_price)
+  }
+  // const [itemTotalPrice, setItemTotalPrice] = useState(parseInt(recentlyAddedProduct.current_price * recentlyAddedProduct.quantity))
+  // const itemTotalPriceCopy = itemTotalPrice;
 
   useEffect(()=>{
     console.log("shopingbasketpagecontent useEffect")
@@ -52,17 +59,27 @@ const AddedToBasketPage = (props) => {
     );
   }
 
-  let main_image
-  let basketItems = []
+  let main_image = null
+  let verticalBasketItems = []
 
   if (typeof user === "object" && 'basket' in user) {
     console.log("inside IF")
     for (let i = 0; i < user.basket.length; i++) {
       console.log("inside FOR")
       // basketItems.push(<BasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
-      basketItems.push(<VerticalBasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
+      verticalBasketItems.push(<VerticalBasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
     }
   }
+  useEffect(()=>{
+    if (user && user.basket) {
+      console.log("mslmlkdn")
+      for (let i = 0; i < user.basket.length; i++) {
+        console.log("inside FOR")
+        // basketItems.push(<BasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
+        verticalBasketItems.push(<VerticalBasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
+      }
+    }
+  },[user])
   
   useEffect(()=>{
     if (
@@ -111,11 +128,14 @@ const AddedToBasketPage = (props) => {
         </h4>
         <GoToBasketButton />
         {/* <div className="horizontal-line top-margin"></div> */}
-        {basketItems}
+        {verticalBasketItems}
         <div id="added-to-basket-new-right-col-img-container">
           <img src={main_image} alt="" />
         </div>
         <div className="horizontal-line"></div>
+      </div>
+      <div id="added-to-basket-usual-content">
+        {/* <Content/> */}
       </div>
     </div>
   );

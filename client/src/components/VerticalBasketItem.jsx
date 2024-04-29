@@ -4,6 +4,7 @@ import PropValueInfo from "./PropValueInfo";
 import QuantitySelector from "./QuantitySelector";
 import PriceDisplay from "./PriceDisplay";
 import { UserContext } from "../App.js"
+import { ReactComponent as TrashCan } from "../icons/trash-can.svg";
 
 const VerticalBasketItem = (props) => {
   //   const [quantity, setQuantity] = useState(1);
@@ -11,6 +12,24 @@ const VerticalBasketItem = (props) => {
   const [user, setUser] = useContext(UserContext)
 
   let quantity = 1
+
+  function handleDelete() {
+    
+    if (typeof user == 'object' && 'basket' in user) {
+      for (let i = 0; i < user.basket.length; i++) {
+        console.log("adsasdsa props.product.id: ", props.product.id)
+        console.log("adsasdsa user.basket[i].id: ", user.basket[i].id)
+        if (user.basket[i].id !== props.product.id) {
+          continue
+        } else {
+          console.log("adsasdsa removing item")
+          user.basket.splice(i,1)
+          setUser(user)
+          sessionStorage.setItem("user", JSON.stringify(user))
+        }
+      }
+    }
+  }
 
   if (typeof user == 'object' && 'basket' in user) {
     for (let i = 0; i < user.basket.length; i++) {
@@ -59,6 +78,9 @@ const VerticalBasketItem = (props) => {
           selectQuantity={selectQuantity}
           setSelectQuantity={setSelectQuantity}
         />
+        <div id="trash-can-border" onClick={handleDelete}>
+          <TrashCan />
+        </div>
       </div>
     </div>
   );
