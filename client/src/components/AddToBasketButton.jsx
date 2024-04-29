@@ -15,15 +15,6 @@ const AddToBasketButton = (props) => {
   }, [user])
 
   function handleClick() {
-    // const objectAdditions = { quantity: e.target.textContent };
-    // const currentObject = JSON.parse(
-    //   localStorage.getItem(`basket/${userId}/${props.item.id}`)
-    // );
-    // const newObject = { ...currentObject, ...objectAdditions };
-    // localStorage.setItem(
-    //   `basket/${userId}/${props.item.id}`,
-    //   JSON.stringify(newObject)
-    // );
     if (typeof user === "object") {
       console.log("aa")
         if ('basket' in user) {
@@ -63,35 +54,6 @@ const AddToBasketButton = (props) => {
       // user is not logged in
       alert("Please Log In to use your basket")
     }
-    
-
-    
-    // props.setSelectQuantity(false);
-    // let currentUserBasket 
-    // if (user.basket) {
-    //   currentUserBasket = user.basket
-    // }
-    
-    
-
-    // setUser()
-
-
-    
-    // console.log({
-    //   main_image: props.main_image,
-    //   current_price: props.current_price,
-    //   quantity: 1,
-    // });
-    // console.log(`basket/${userId}/${thisItemId}`);
-    // localStorage.setItem(
-    //   `basket/${userId}/${thisItemId}`,
-    //   JSON.stringify({
-    //     main_image: props.main_image,
-    //     current_price: props.current_price,
-    //     quantity: 1,
-    //   })
-    // );
     navigate("/added");
   }
 
