@@ -3,7 +3,7 @@ import ShoppingBasket from "./ShoppingBasket";
 import PriceDisplay from "./PriceDisplay";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext, TotalItemsInBasket } from "../App";
+import { UserContext, TotalItemsInBasket, TotalPrice } from "../App";
 // import { TotalItemsInBasket, TotalPrice } from "./ShoppingBasketPage";
 
 const ShoppingBasketPageContent = (props) => {
@@ -14,6 +14,9 @@ const ShoppingBasketPageContent = (props) => {
 
   const [totalItemsInBasket, setTotalItemsInBasket] = useContext(TotalItemsInBasket)
   let totalItemsInBasketCopy = parseInt(totalItemsInBasket);
+
+  const [totalPrice, setTotalPrice] = useContext(TotalPrice)
+  let totalPriceCopy = parseInt(totalPrice);
   
   function totalItemsInBasketGetter() {
     return totalItemsInBasket;
@@ -56,7 +59,7 @@ const ShoppingBasketPageContent = (props) => {
       </div>
       <div id="basket-content-right-col">
         <p>Subtotal({parseInt(totalItemsInBasketCopy) + " "}  {props.itemText} ) </p>
-        <PriceDisplay totalItemsInBasket={props.totalItemsInBasket} setTotalItemsInBasket={props.setTotalItemsInBasket} price={props.totalPrice} setPrice={props.setTotalPrice} classes={classes} />
+        <PriceDisplay totalItemsInBasket={totalItemsInBasketCopy} setTotalItemsInBasket={props.setTotalItemsInBasket} price={totalPriceCopy} setPrice={props.setTotalPrice} classes={classes} />
         <button className="checkout-button" onClick={handleClick}>Proceed to checkout</button>
       </div>
     </div>
