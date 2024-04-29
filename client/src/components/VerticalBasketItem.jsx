@@ -29,6 +29,7 @@ const VerticalBasketItem = (props) => {
         }
       }
     }
+    props.setIsItemRemoved(value=>!value)
   }
 
   if (typeof user == 'object' && 'basket' in user) {

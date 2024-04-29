@@ -20,6 +20,8 @@ const AddedToBasketPage = (props) => {
   const [totalItemsInBasket, setTotalItemsInBasket] = useContext(TotalItemsInBasket);
   const [totalPrice, setTotalPrice] = useContext(TotalPrice);
 
+  const [isItemRemoved, setIsItemRemoved] = useState(false) // state to rerender page on verticalBasketItem removal
+
   // const [itemTotalPrice, setItemTotalPrice] = useState(parseInt(recentlyAddedProduct.current_price * recentlyAddedProduct.quantity))
 
   const [recentlyAddedProduct, setRecentlyAddedProduct] = useState(null)
@@ -43,9 +45,16 @@ const AddedToBasketPage = (props) => {
         // totalItemsInBasketCopy += parseInt(user.basket[i].quantity);
         // console.log("################### totalItemsInBasketCopy: ", totalItemsInBasketCopy);
       }
+      verticalBasketItems = []
+      console.log("mslmlkdn ", user.basket.length)
+      for (let i = 0; i < user.basket.length; i++) {
+        console.log("inside FOR")
+        // basketItems.push(<BasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
+        verticalBasketItems.push(<VerticalBasketItem key={i} isItemRemoved={isItemRemoved} setIsItemRemoved={setIsItemRemoved} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
+      }
     }
     // forceUpdate();
-  }, [user] )
+  }, [user, isItemRemoved] )
 
   console.log("AddedToBasketPage -> user.basket: ", user.basket);
 
@@ -67,19 +76,9 @@ const AddedToBasketPage = (props) => {
     for (let i = 0; i < user.basket.length; i++) {
       console.log("inside FOR")
       // basketItems.push(<BasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
-      verticalBasketItems.push(<VerticalBasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
+      verticalBasketItems.push(<VerticalBasketItem key={i} isItemRemoved={isItemRemoved} setIsItemRemoved={setIsItemRemoved} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
     }
   }
-  useEffect(()=>{
-    if (user && user.basket) {
-      console.log("mslmlkdn")
-      for (let i = 0; i < user.basket.length; i++) {
-        console.log("inside FOR")
-        // basketItems.push(<BasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
-        verticalBasketItems.push(<VerticalBasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
-      }
-    }
-  },[user])
   
   useEffect(()=>{
     if (
