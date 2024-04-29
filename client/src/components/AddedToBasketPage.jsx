@@ -7,18 +7,36 @@ import { ReactComponent as DownArrow } from "../icons/down-arrow.svg";
 import { ReactComponent as TrashCan } from "../icons/trash-can.svg";
 import SelectQuantityDropDown from "./SelectQuantityDropDown";
 import QuantitySelector from "./QuantitySelector";
-import { UserContext } from "../App.js"
+import { UserContext, TotalItemsInBasket, TotalPrice } from "../App.js"
 
 const AddedToBasketPage = (props) => {
   let productsInBasketIds = [];
   let productsInBasket = [];
 
   const [user, setUser] = useContext(UserContext);
+  const [totalItemsInBasket, setTotalItemsInBasket] = useContext(TotalItemsInBasket);
+  const [totalPrice, setTotalPrice] = useContext(TotalPrice);
 
   let recentlyAddedProduct = user.basket[user.basket.length - 1];
   console.log(recentlyAddedProduct.current_price)
   const [itemTotalPrice, setItemTotalPrice] = useState(parseInt(recentlyAddedProduct.current_price * recentlyAddedProduct.quantity))
   const itemTotalPriceCopy = itemTotalPrice;
+
+  useEffect(()=>{
+    console.log("shopingbasketpagecontent useEffect")
+    if (user && user.basket) {
+      setTotalItemsInBasket(0)
+      setTotalPrice(0)
+      for (let i = 0; i < user.basket.length ; i++) {
+        console.log("################### Subtotal is being adjusted by adding the item with id: ", user.basket[i].id, " quantity: ", user.basket[i].quantity);
+        setTotalItemsInBasket(value => value + user.basket[i].quantity)
+        setTotalPrice(value => value + user.basket[i].quantity * user.basket[i].current_price)
+        // totalItemsInBasketCopy += parseInt(user.basket[i].quantity);
+        // console.log("################### totalItemsInBasketCopy: ", totalItemsInBasketCopy);
+      }
+    }
+    // forceUpdate();
+  }, [user] )
 
   console.log("AddedToBasketPage -> user.basket: ", user.basket);
 
@@ -64,7 +82,7 @@ const AddedToBasketPage = (props) => {
           </div>
           <div id="added-to-basket-narrowed-page-right-col">
             <div>
-              Card Subtotal: <PriceDisplay price={itemTotalPrice} />{" "}
+              Card Subtotal: <PriceDisplay price={parseFloat(totalPrice.toFixed(2))} />{" "}
             </div>
             <div>Proceed to checkout</div>
             <div>Go to Basket</div>
@@ -77,7 +95,7 @@ const AddedToBasketPage = (props) => {
           id="added-to-basket-new-right-col-current-price"
           className="classic-price-display dark-orange"
         >
-          ${itemTotalPrice}
+          ${parseFloat(totalPrice.toFixed(2))}
         </h4>
         <GoToBasketButton />
         <div className="horizontal-line top-margin"></div>

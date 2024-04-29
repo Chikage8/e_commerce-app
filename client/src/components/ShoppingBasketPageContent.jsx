@@ -59,7 +59,7 @@ const ShoppingBasketPageContent = (props) => {
       </div>
       <div id="basket-content-right-col">
         <p>Subtotal({parseInt(totalItemsInBasketCopy) + " "}  {props.itemText} ) </p>
-        <PriceDisplay totalItemsInBasket={totalItemsInBasketCopy} setTotalItemsInBasket={props.setTotalItemsInBasket} price={totalPriceCopy} setPrice={props.setTotalPrice} classes={classes} />
+        <PriceDisplay totalItemsInBasket={totalItemsInBasket} setTotalItemsInBasket={props.setTotalItemsInBasket} price={parseFloat(totalPrice.toFixed(2))} setPrice={props.setTotalPrice} classes={classes} />
         <button className="checkout-button" onClick={handleClick}>Proceed to checkout</button>
       </div>
     </div>
