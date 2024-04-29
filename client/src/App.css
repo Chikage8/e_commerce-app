@@ -654,6 +654,10 @@ p {
   margin-top: calc(var(--padding)*11);
 } 
 
+.bottom-margin {
+  margin-bottom: calc(var(--padding)*11);
+}
+
 #added-to-basket-new-right-col-subtotal-text {
   margin-top: calc(var(--padding)*12);
   font-size: smaller;

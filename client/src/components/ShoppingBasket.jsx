@@ -16,9 +16,8 @@ const ShoppingBasket = (props) => {
   console.log(user )
 
   if (typeof user === "object" && 'basket' in user) {
-    console.log("inside IF")
+    console.log("building basketItems")
     for (let i = 0; i < user.basket.length; i++) {
-    console.log("inside FOR")
       basketItems.push(<BasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
     }
   }

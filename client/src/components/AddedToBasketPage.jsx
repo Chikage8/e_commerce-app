@@ -8,6 +8,8 @@ import { ReactComponent as TrashCan } from "../icons/trash-can.svg";
 import SelectQuantityDropDown from "./SelectQuantityDropDown";
 import QuantitySelector from "./QuantitySelector";
 import { UserContext, TotalItemsInBasket, TotalPrice } from "../App.js"
+import BasketItem from "./BasketItem.jsx";
+import VerticalBasketItem from "./VerticalBasketItem.jsx";
 
 const AddedToBasketPage = (props) => {
   let productsInBasketIds = [];
@@ -50,7 +52,17 @@ const AddedToBasketPage = (props) => {
     );
   }
 
-  let main_image;
+  let main_image
+  let basketItems = []
+
+  if (typeof user === "object" && 'basket' in user) {
+    console.log("inside IF")
+    for (let i = 0; i < user.basket.length; i++) {
+      console.log("inside FOR")
+      // basketItems.push(<BasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
+      basketItems.push(<VerticalBasketItem key={i} id={user.basket[i].id} product={user.basket[i].product} current_price={user.basket[i].current_price} quantityChanged={props.quantityChanged} />)
+    }
+  }
   
   useEffect(()=>{
     if (
@@ -98,24 +110,12 @@ const AddedToBasketPage = (props) => {
           ${parseFloat(totalPrice.toFixed(2))}
         </h4>
         <GoToBasketButton />
-        <div className="horizontal-line top-margin"></div>
+        {/* <div className="horizontal-line top-margin"></div> */}
+        {basketItems}
         <div id="added-to-basket-new-right-col-img-container">
           <img src={main_image} alt="" />
         </div>
-        <h4
-          id="added-to-basket-new-right-col-current-price"
-          className="classic-price-display black top-margin bot-margin"
-        >
-          ${itemTotalPrice}
-        </h4>
-        <QuantitySelector
-          product={recentlyAddedProduct}
-          selectQuantity={selectQuantity}
-          setSelectQuantity={setSelectQuantity}
-          quantity={quantity}
-          setQuantity={setQuantity}
-        />
-        <div className="horizontal-line top-margin"></div>
+        <div className="horizontal-line"></div>
       </div>
     </div>
   );
