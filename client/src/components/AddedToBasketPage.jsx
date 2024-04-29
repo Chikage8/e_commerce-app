@@ -15,22 +15,13 @@ const AddedToBasketPage = (props) => {
 
   const [user, setUser] = useContext(UserContext);
 
+  let recentlyAddedProduct = user.basket[user.basket.length - 1];
+  console.log(recentlyAddedProduct.current_price)
+  const [itemTotalPrice, setItemTotalPrice] = useState(parseInt(recentlyAddedProduct.current_price * recentlyAddedProduct.quantity))
+  const itemTotalPriceCopy = itemTotalPrice;
+
   console.log("AddedToBasketPage -> user.basket: ", user.basket);
 
-  // Store the Ids of the basket items in an array
-  // for (let i = 0; i < localStorage.length; i++) {
-  //   console.log("a");
-  //   if (
-  //     localStorage.key(i).substring(0, 7) == `basket/` &&
-  //     localStorage.key(i).split("/")[1] == user.id &&
-  //     localStorage.key(i).split("/").length > 2 &&
-  //     localStorage.key(i).split("/")[2] !== "undefined"
-  //   ) {
-  //     console.log("aa");
-  //     console.log(parseInt(localStorage.key(i).split("/")[2]));
-  //     productsInBasketIds.push(parseInt(localStorage.key(i).split("/")[2]));
-  //   }
-  // }
 
   let products = JSON.parse(localStorage.getItem("products"));
   console.log(products);
@@ -41,16 +32,8 @@ const AddedToBasketPage = (props) => {
     );
   }
 
-  // Set the user basket in localStorage
-  //   user.user.basket = [];
-  //   productsInBasket.forEach((prod) => {
-  //     user.user.basket.push(prod);
-  //   });
-
-  let recentlyAddedProduct = user.basket[user.basket.length - 1];
   let main_image;
-  // let current_price;
-  const [current_price, setCurrentPrice] = useState(0)
+  
   useEffect(()=>{
     if (
       recentlyAddedProduct !== null &&
@@ -60,20 +43,10 @@ const AddedToBasketPage = (props) => {
       console.log("recentlyAddedProduct: ", recentlyAddedProduct);
       // adjusting added to basket page pricing
       main_image = recentlyAddedProduct.main_image;
-      setCurrentPrice((
-        recentlyAddedProduct.list_price *
-        (1 - recentlyAddedProduct.discount_percentage / 100)
-      ).toFixed(2));
-
-      // altering user basket
-      // for ( let i = 0; i < user.basket.length; i++ ) {
-      //   if(user.basket[i].id === recentlyAddedProduct.id) {
-      //     user.basket[i].quantity = parseInt(user.basket[i].quantity) + 1
-      //     sessionStorage.setItem("user", JSON.stringify(user))
-      //     setUser(user)
-      //     break
-      //   }
-      // }
+      // setItemTotalPrice((
+      //   recentlyAddedProduct.list_price *
+      //   (1 - recentlyAddedProduct.discount_percentage / 100)
+      // ).toFixed(2));
     }
   },[])
 
@@ -91,7 +64,7 @@ const AddedToBasketPage = (props) => {
           </div>
           <div id="added-to-basket-narrowed-page-right-col">
             <div>
-              Card Subtotal: <PriceDisplay price={current_price} />{" "}
+              Card Subtotal: <PriceDisplay price={itemTotalPrice} />{" "}
             </div>
             <div>Proceed to checkout</div>
             <div>Go to Basket</div>
@@ -104,7 +77,7 @@ const AddedToBasketPage = (props) => {
           id="added-to-basket-new-right-col-current-price"
           className="classic-price-display dark-orange"
         >
-          ${current_price * quantity}
+          ${itemTotalPrice}
         </h4>
         <GoToBasketButton />
         <div className="horizontal-line top-margin"></div>
@@ -115,7 +88,7 @@ const AddedToBasketPage = (props) => {
           id="added-to-basket-new-right-col-current-price"
           className="classic-price-display black top-margin bot-margin"
         >
-          ${current_price * quantity}
+          ${itemTotalPrice}
         </h4>
         <QuantitySelector
           product={recentlyAddedProduct}
