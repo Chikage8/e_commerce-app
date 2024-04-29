@@ -12,11 +12,13 @@ import BuyPage from "./components/BuyPage.jsx";
 export const UserContext = React.createContext({});
 export const TotalItemsInBasket = React.createContext(0);
 export const TotalPrice = React.createContext(0);
+export const QuantityChanged = React.createContext(false);
 
 function App() {
 
   const [totalItemsInBasket, setTotalItemsInBasket] = useState(0)
   const [totalPrice, setTotalPrice] = useState(0)
+  const [quantityChanged, setQuantityChanged] = useState(false)
 
   let valueToSetUser
   if (sessionStorage.getItem("user") !== undefined && sessionStorage.getItem("user") !== 'undefined') {
@@ -79,18 +81,20 @@ function App() {
       <UserContext.Provider value={[user, setUser]}>
         <TotalPrice.Provider value={[totalPrice, setTotalPrice]}>
           <TotalItemsInBasket.Provider value={[totalItemsInBasket, setTotalItemsInBasket]}>
-            <Router>
-              <Routes>
-                <Route path="/" exact element={<HomePage />} />
-                <Route path="/signin" element={<SignInPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/basket" element={<ShoppingBasketPage />} />
-                <Route path="/added" element={<AddedToBasketPage />} />
-                <Route path="/buy" element={<BuyPage />} />
-                {productRoutes}
-                {/* <Route path="/mouse" element={<ProductPage />} /> */}
-              </Routes>
-            </Router>
+            <QuantityChanged.Provider value={[quantityChanged, setQuantityChanged]}>
+              <Router>
+                <Routes>
+                  <Route path="/" exact element={<HomePage />} />
+                  <Route path="/signin" element={<SignInPage />} />
+                  <Route path="/register" element={<RegisterPage />} />
+                  <Route path="/basket" element={<ShoppingBasketPage />} />
+                  <Route path="/added" element={<AddedToBasketPage />} />
+                  <Route path="/buy" element={<BuyPage />} />
+                  {productRoutes}
+                  {/* <Route path="/mouse" element={<ProductPage />} /> */}
+                </Routes>
+              </Router>
+            </QuantityChanged.Provider>
           </TotalItemsInBasket.Provider>
         </TotalPrice.Provider>
       </UserContext.Provider>

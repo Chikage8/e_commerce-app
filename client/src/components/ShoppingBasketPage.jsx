@@ -5,14 +5,11 @@ import BasketItem from "./BasketItem.jsx";
 import { UserContext, TotalItemsInBasket, TotalPrice } from "../App.js";
 
 export const CheckedProducts = React.createContext([]);
-export const QuantityChanged = React.createContext(false);
-
-
 
 const ShoppingBasketPage = () => {
 
   const [checkedProducts, setCheckedProducts] = useState([])
-  const [quantityChanged, setQuantityChanged] = useState(false)
+  
   const [totalItemsInBasket, setTotalItemsInBasket] = useContext(TotalItemsInBasket)
   const [totalPrice, setTotalPrice] = useContext(TotalPrice)
   
@@ -62,23 +59,21 @@ const ShoppingBasketPage = () => {
 
   return (
     <div>
-      <QuantityChanged.Provider value={[quantityChanged, setQuantityChanged]}>
-        <CheckedProducts.Provider value={[checkedProducts, setCheckedProducts]}>
-          <Header quantity={quantity} />
-          <ShoppingBasketPageContent 
-            quantity={quantity}
-            childSetQuantity={childSetQuantity} 
-            checkedProducts={checkedProducts}
-            basketProducts={basketProducts} 
-            userId={userId}  
-            totalPrice={totalPrice}
-            setTotalPrice={setTotalPrice}
-            totalItemsInBasket={totalItemsInBasket}
-            setTotalItemsInBasket = {setTotalItemsInBasket}
-            itemText={itemText}
-          />
-        </CheckedProducts.Provider>
-      </QuantityChanged.Provider>
+      <CheckedProducts.Provider value={[checkedProducts, setCheckedProducts]}>
+        <Header quantity={quantity} />
+        <ShoppingBasketPageContent 
+          quantity={quantity}
+          childSetQuantity={childSetQuantity} 
+          checkedProducts={checkedProducts}
+          basketProducts={basketProducts} 
+          userId={userId}  
+          totalPrice={totalPrice}
+          setTotalPrice={setTotalPrice}
+          totalItemsInBasket={totalItemsInBasket}
+          setTotalItemsInBasket = {setTotalItemsInBasket}
+          itemText={itemText}
+        />
+      </CheckedProducts.Provider>
     </div>
   );
 };

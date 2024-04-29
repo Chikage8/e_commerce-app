@@ -1,6 +1,5 @@
 import React, { Children, useContext } from "react";
-import { UserContext, TotalItemsInBasket, TotalPrice } from "../App";
-import { QuantityChanged } from "./ShoppingBasketPage.jsx";
+import { UserContext, TotalItemsInBasket, TotalPrice, QuantityChanged } from "../App";
 
 const SelectQuantityDropDown = (props) => {
   const [user, setUser] = useContext(UserContext)
@@ -41,7 +40,7 @@ const SelectQuantityDropDown = (props) => {
           user.basket[i].quantity = e.target.textContent
           setUser(user)
           sessionStorage.setItem("user", JSON.stringify(user))
-          props.setItemQuantity(e.target.textContent)
+          // props.setItemQuantity(e.target.textContent)
           setQuantityChanged(!quantityChanged)
         }
       }
