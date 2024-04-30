@@ -70,25 +70,41 @@ app.get("/mouse/:id", async (req, res) => {
   }
 });
 
+app.post("/getuserhash", async (req, res) => {
+  try {
+    let email = req.body.email.email;
+    const hash = await pool.query(
+      "SELECT * FROM users WHERE email = ?",
+      [email]
+    )
+    res.send({hash: hash[0][0].password});
+  }
+  catch (error) {
+    console.log(error.stack);
+  }
+})
+
 app.post("/signin", async (req, res) => {
   try {
     let email = req.body.email.email;
-    let password = req.body.password.password;
+    // let password = req.body.password.password;
 
-    console.log("email: " + email);
-    console.log("password: " + password);
+    
 
-    const result = await pool.query(
-      "SELECT * FROM users WHERE email = ? AND password = ?",
-      [email, password]
-    );
-    if (result[0].length != 0) {
-      console.log("/signin result[0]: ", result[0]);
-      res.send({ user: result[0] });
-    } else {
-      console.log("sending response");
-      res.send("You are not registered to our website");
-    }
+    // console.log("email: " + email);
+    // // console.log("password: " + password);
+
+    // const result = await pool.query(
+    //   "SELECT * FROM users WHERE email = ? AND password = ?",
+    //   [email, password]
+    // );
+    // if (result[0].length != 0) {
+    //   console.log("/signin result[0]: ", result[0]);
+    //   res.send({ user: result[0] });
+    // } else {
+    //   console.log("sending response");
+    //   res.send("You are not registered to our website");
+    // }
   } catch (error) {
     console.error(
       "error occurred while trying to fill in items list",
@@ -102,12 +118,13 @@ app.post("/register", async (req, res) => {
     let name = req.body.name.name;
     let email = req.body.email.email;
     let password = req.body.password.hash;
+    let salt = req.body.salt.salt;
     console.log("name: " + name + "\n" + "email: " + email + "\n");
     // await pool.query("DELETE FROM items WHERE id = ?", [itemToDelete]);
     console.log(email, password, name);
     await pool.query(
-      "INSERT INTO users (email, password, name) VALUES (?, ?, ?);",
-      [email, password, name]
+      "INSERT INTO users (email, password, name, salt) VALUES (?, ?, ?, ?);",
+      [email, password, name, salt]
     );
     const result = await pool.query(
       "SELECT * FROM users WHERE email = ? AND password = ?",

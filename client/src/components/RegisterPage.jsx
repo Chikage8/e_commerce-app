@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App.js"
-import bcrypt from "bcryptjs"
+import bcryptjs from "bcryptjs"
 
 function RegisterPage(props) {
   const namePattern = /^[a-zA-Z]{2,}$/;
@@ -62,14 +62,15 @@ function RegisterPage(props) {
       //   })
       // .catch((error) => console.log(error));
 
-      const salt = bcrypt.genSaltSync(10);
-      let hash = bcrypt.hashSync(password, salt);
+      const salt = bcryptjs.genSaltSync(10);
+      let hash = bcryptjs.hashSync(password, salt);
       console.log(hash)
 
       axios.post("http://localhost:5000/register", {
           email: { email },
           password: { hash },
           name: { name },
+          salt: { salt },
         })
         .then((response) => {
           if (typeof response.data == "object")  {
