@@ -101,7 +101,7 @@ app.post("/register", async (req, res) => {
   try {
     let name = req.body.name.name;
     let email = req.body.email.email;
-    let password = req.body.password.password;
+    let password = req.body.password.hash;
     console.log("name: " + name + "\n" + "email: " + email + "\n");
     // await pool.query("DELETE FROM items WHERE id = ?", [itemToDelete]);
     console.log(email, password, name);
