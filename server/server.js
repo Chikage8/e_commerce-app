@@ -77,7 +77,12 @@ app.post("/getuserhash", async (req, res) => {
       "SELECT * FROM users WHERE email = ?",
       [email]
     )
-    res.send({hash: hash[0][0].password});
+    console.log(hash[0].length);
+    if (hash[0].length === 0) {
+      res.send({email: false, hash: ""});
+    } else {
+      res.send({email: true, hash: hash[0][0].password});
+    }
   }
   catch (error) {
     console.log(error.stack);
@@ -91,20 +96,20 @@ app.post("/signin", async (req, res) => {
 
     
 
-    // console.log("email: " + email);
-    // // console.log("password: " + password);
+    console.log("email: " + email);
+    // console.log("password: " + password);
 
-    // const result = await pool.query(
-    //   "SELECT * FROM users WHERE email = ? AND password = ?",
-    //   [email, password]
-    // );
-    // if (result[0].length != 0) {
-    //   console.log("/signin result[0]: ", result[0]);
-    //   res.send({ user: result[0] });
-    // } else {
-    //   console.log("sending response");
-    //   res.send("You are not registered to our website");
-    // }
+    const result = await pool.query(
+      "SELECT * FROM users WHERE email = ?",
+      [email]
+    );
+    if (result[0].length != 0) {
+      console.log("/signin result[0]: ", result[0]);
+      res.send({ user: result[0] });
+    } else {
+      console.log("sending response");
+      res.send("You are not registered to our website");
+    }
   } catch (error) {
     console.error(
       "error occurred while trying to fill in items list",

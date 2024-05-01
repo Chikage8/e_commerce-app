@@ -39,34 +39,46 @@ function SignInPage(props) {
       setPasswordWarning(null);
 
       let hash = "";
+      let isEmailCorrect = false;
 
       await axios.post("http://localhost:5000/getuserhash", {email: { email}}).then(
         (response) => {
-          console.log(typeof response.data.hash);
-          hash = response.data.hash;
+          console.log(response.data.email);
+          if (response.data.email) {
+            isEmailCorrect = true;
+            hash = response.data.hash;
+          }
         } 
       )
-
       console.log(hash);
       console.log(password);
+      if (!isEmailCorrect) {
+        navigate("/signin");
+        return;
+      }
+      console.log(bcryptjs.compareSync(password, hash));
+      const isPasswordCorrect = bcryptjs.compareSync(password, hash);
 
-      console.log("isPasswordCorrect: ", bcryptjs.compareSync(password, hash));
 
-      // axios.post("http://localhost:5000/signin", {
-      //     email: { email },
-      //   })
-      //   .then((response) => {
-      //     // console.log("response.data: " + response.data.user[0].name);
-      //     typeof response.data == "object"
-      //       ? setUser(response.data.user[0])                                      // localStorage.setItem("user", JSON.stringify(response.data))
-      //       : setWarning(
-      //           "This email and password combination is not registered to our services"
-      //         );
-      //     typeof response.data == "object"
-      //       ? redirect("/")
-      //       : setMailWarning(null);
-      //   })
-      //   .catch((error) => console.log("error: ", error));
+      console.log("isPasswordCorrect: ", isPasswordCorrect);
+
+      if (isPasswordCorrect) {
+        axios.post("http://localhost:5000/signin", {
+            email: { email },
+          })
+          .then((response) => {
+            // console.log("response.data: " + response.data.user[0].name);
+            typeof response.data == "object"
+              ? setUser(response.data.user[0])                                      // localStorage.setItem("user", JSON.stringify(response.data))
+              : setWarning(
+                  "This email and password combination is not registered to our services"
+                );
+            typeof response.data == "object"
+              ? redirect("/")
+              : setMailWarning(null);
+          })
+          .catch((error) => console.log("error: ", error));
+      }
     } else if (passwordPattern.test(password)) {
       // only mail is wrong
       setWarning(null);
