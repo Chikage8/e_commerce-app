@@ -53,7 +53,9 @@ function SignInPage(props) {
       console.log(hash);
       console.log(password);
       if (!isEmailCorrect) {
-        navigate("/signin");
+        setMailWarning(
+          "Your email is not registered within our database, please enter a valid e-mail or register"
+        );
         return;
       }
       console.log(bcryptjs.compareSync(password, hash));
@@ -78,6 +80,10 @@ function SignInPage(props) {
               : setMailWarning(null);
           })
           .catch((error) => console.log("error: ", error));
+      } else {
+        setPasswordWarning(
+          "Wrong password"
+        );
       }
     } else if (passwordPattern.test(password)) {
       // only mail is wrong
