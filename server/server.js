@@ -123,13 +123,12 @@ app.post("/register", async (req, res) => {
     let name = req.body.name.name;
     let email = req.body.email.email;
     let password = req.body.password.hash;
-    let salt = req.body.salt.salt;
     console.log("name: " + name + "\n" + "email: " + email + "\n");
     // await pool.query("DELETE FROM items WHERE id = ?", [itemToDelete]);
     console.log(email, password, name);
     await pool.query(
-      "INSERT INTO users (email, password, name, salt) VALUES (?, ?, ?, ?);",
-      [email, password, name, salt]
+      "INSERT INTO users (email, password, name) VALUES (?, ?, ?);",
+      [email, password, name]
     );
     const result = await pool.query(
       "SELECT * FROM users WHERE email = ? AND password = ?",

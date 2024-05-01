@@ -70,7 +70,6 @@ function RegisterPage(props) {
           email: { email },
           password: { hash },
           name: { name },
-          salt: { salt },
         })
         .then((response) => {
           if (typeof response.data == "object")  {
