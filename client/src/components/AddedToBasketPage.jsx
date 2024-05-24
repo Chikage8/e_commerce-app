@@ -112,8 +112,8 @@ const AddedToBasketPage = (props) => {
             <div>
               Card Subtotal: <PriceDisplay price={parseFloat(totalPrice.toFixed(2))} />{" "}
             </div>
-            <div>Proceed to checkout</div>
-            <div>Go to Basket</div>
+            {/* <div>Proceed to checkout</div>
+            <div>Go to Basket</div> */}
           </div>
         </div>
       </div>
