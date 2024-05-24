@@ -898,3 +898,11 @@ p {
   margin-left: 0;
   padding-left: 0;
 }
+
+#buy-page-header {
+  margin-left: 12rem;
+}
+
+#amazon-link {
+  color: blue;
+}
